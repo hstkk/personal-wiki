@@ -25,11 +25,11 @@ namespace PersonalWiki.View
         {
             InitializeComponent();
             this.id = id;
-/*            using (DataProvider dp = new DataProvider())
+            using (DataProvider dp = new DataProvider())
             {
                 this.DataContext = dp.GetPage(id);
             }
-*/        }
+        }
 
         private void textChanged(object sender, TextChangedEventArgs e)
         {
@@ -41,7 +41,11 @@ namespace PersonalWiki.View
 
         private void titleChanged(object sender, TextChangedEventArgs e)
         {
-
+            if(!string.IsNullOrWhiteSpace(title.Text))
+            using (DataProvider dp = new DataProvider())
+            {
+                dp.updateTitle(id, title.Text);
+            }
         }
     }
 }
