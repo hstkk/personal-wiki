@@ -31,7 +31,7 @@ namespace PersonalWiki
             //todo:check if sql server ce is installed
             //todo:refresh treeView
             //todo:database and tabs from last time from ini file
-            this.DataContext = dp.Projects;
+            this.ProjectsTreeView.DataContext = dp.Projects;
         }
 
         private void ShowAboutTab(object sender, RoutedEventArgs e)
@@ -47,9 +47,9 @@ namespace PersonalWiki
 
         private void ShowPageTab(object sender, RoutedEventArgs e)
         {
-            string header = dp.GetPageTabHeader(7);
-            if (!TabIsOpen(header))
-                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = header, Content = new View.PageTab(7) });
+//            string header = dp.GetPageTabHeader(7);
+/*            if (!TabIsOpen(header))
+                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = header, Content = new View.PageTab(7) });*/
 //            e.RoutedEvent.
             //            e.Parameter.ToString();
     //        this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = hl.CommandParameter.ToString()});
@@ -70,15 +70,6 @@ namespace PersonalWiki
             if (q.Count().Equals(0))
                 open = false;
             return open;
-        }
-
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-/*            int i;
-            if(Int32.TryParse(e.Parameter.ToString(), out i))
-                e.CanExecute = true;
-            e.CanExecute = false;*/
-            e.CanExecute = true;
         }
     }
 }
