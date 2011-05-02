@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="PersonalWiki.View.AboutTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <TextBlock TextWrapping="Wrap">
+            <Bold>About PersonalWiki</Bold><LineBreak/>©2011 Sami Hostikka.<LineBreak/>All Rights Reserved.<LineBreak/><LineBreak/><Bold>Version: 0.1</Bold><LineBreak/><LineBreak/><Bold>Credits</Bold><LineBreak/>Icons: Tango Desktop Project.<LineBreak/>Ribbon: ©2010 Microsoft Corporation.<LineBreak/>
+        </TextBlock>
+        <TextBlock TextWrapping="Wrap" FontSize="10">
+            Warning: This program comes without any warranty, to the extent permitted by applicable law.
+        </TextBlock>
+    </StackPanel>
+</UserControl>

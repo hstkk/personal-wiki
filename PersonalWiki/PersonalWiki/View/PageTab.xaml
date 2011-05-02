@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="PersonalWiki.View.PageTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel LastChildFill="True">
+        <TextBox Name="title"
+                 MaxLength="100"
+                 FontWeight="Bold"
+                 Text="{Binding Path=Title}"
+                 BorderBrush="{x:Null}"
+                 DockPanel.Dock="Top"
+                 TextChanged="titleChanged" />
+        <WrapPanel DockPanel.Dock="Top">
+            <TextBlock FontStyle="Italic"
+                       Foreground="Gray"
+                       Text="{Binding Path=Date, StringFormat=HH:mm dd.MM.yyyy}"
+                       />
+            <TextBlock Name="changed"
+                       Text="*"
+                       FontWeight="Bold"
+                       Visibility="Hidden" HorizontalAlignment="Right" />
+         </WrapPanel>
+        <!--<RichTextBox Name="text" AcceptsTab="True" />-->
+        <TextBox Name="text"
+                 AcceptsTab="True"
+                 Text="{Binding Path=Text}"
+                 BorderBrush="{x:Null}"
+                 HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto"
+                 AllowDrop="True"
+                 AcceptsReturn="True"
+                 TextChanged="textChanged"/>
+    </DockPanel>
+</UserControl>

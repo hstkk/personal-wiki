@@ -1,0 +1,159 @@
+﻿<ribbon:RibbonWindow x:Class="PersonalWiki.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+        xmlns:local="clr-namespace:PersonalWiki" 
+        Title="Personal wiki"
+		x:Name="RibbonWindow"
+		Width="640" Height="480"
+        Icon="tango-accessories-text-editor.ico">
+    <Window.Resources>
+<!--        <ResourceDictionary Source="MainWindowResources.xaml"/>-->
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="Help" Executed="ShowAboutTab" />
+        <CommandBinding CanExecute="CommandBinding_CanExecute" Command="BrowseBack" Executed="ShowPageTab"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
+                    <ribbon:RibbonApplicationMenuItem Header="New"
+                                                      ImageSource="Images\32x32\document-new.png"
+                                                      Command="New" />
+                    <ribbon:RibbonApplicationMenuItem Header="Open"
+                                                      ImageSource="Images\32x32\document-open.png"
+                                                      Command="Open" />
+                    <ribbon:RibbonApplicationMenuItem Header="Save"
+                                                      ImageSource="Images\32x32\document-save.png"
+                                                      Command="Save" />
+                    <ribbon:RibbonApplicationMenuItem Header="Save as..."
+                                                      ImageSource="Images\32x32\document-save-as.png" 
+                                                      Command="SaveAs" />
+                    <ribbon:RibbonSeparator/>
+                    <ribbon:RibbonApplicationMenuItem Header="Page settings"
+                                                      ImageSource="Images\32x32\document-properties.png"
+                                                      Command="Properties" />
+                    <ribbon:RibbonApplicationMenuItem Header="Print"
+                                                      ImageSource="Images\32x32\document-print.png"
+                                                      Command="Print" />
+                    <ribbon:RibbonSeparator/>
+                    <ribbon:RibbonApplicationMenuItem Header="About PersonalWiki"
+                                                      ImageSource="Images\32x32\help-browser.png"
+                                                      Command="Help" />
+                    <ribbon:RibbonSeparator/>
+                    <ribbon:RibbonApplicationMenuItem Header="Quit"
+                                                      ImageSource="Images\32x32\process-stop.png"
+                                                      Command="Close" />
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
+            <ribbon:RibbonTab x:Name="HomeTab" 
+                              Header="Home">
+                <ribbon:RibbonGroup x:Name="New"
+                                    Header="New">
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\document-new.png"
+                                         Label="Page"/>
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\folder-new.png"
+                                         Label="Project"/>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="Clipboard"
+                                    Header="Clipboard">
+                    <ribbon:RibbonButton LargeImageSource="Images\32x32\edit-paste.png"
+                                         Label="Paste"
+                                         Command="Paste" />
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-cut.png"
+                                         Label="Cut"
+                                         Command="Cut" />
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-copy.png"
+                                         Label="Copy"
+                                         Command="Copy"
+                                         ToolTipTitle="Copy (Ctrl+C)"
+                                         ToolTipDescription="Copies the selected content on to the clipboard."/>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="Font"
+                                    Header="Font">
+                    <ribbon:RibbonComboBox />
+                    <ribbon:RibbonComboBox />
+                    <!--<ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-bold.png"/>
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-italic.png"/>
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-underline.png"/>
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-strikethrough.png"/>-->
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="Editing" Header="Editing">
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-find.png"
+                                         Label="Find"
+                                         Command="Find"/>
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-find-replace.png"
+                                         Label="Replace"
+                                         Command="Replace"/>
+                    <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-select-all.png"
+                                         Label="Select all"
+                                         Command="SelectAll" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
+        <TabControl Margin="5,5,0,5" TabStripPlacement="Bottom">
+            <TabItem Header="Projects">
+                <TabItem.Content>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <TreeView ItemsSource="{Binding}" Name="ProjectsTreeView" Padding="0,0,9,0" BorderBrush="{x:Null}" DockPanel.Dock="Left">
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
+                                    <TextBlock Text="{Binding Path=Title}" />
+                                </HierarchicalDataTemplate>
+                                <DataTemplate DataType="{x:Type local:PageResult}">
+                                    <TextBlock>
+                                        <Hyperlink  Command="BrowseBack" CommandParameter="{Binding Path=Id}">
+                                            <TextBlock Text="{Binding Path=Title}"/>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+                    </ScrollViewer>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Archive">
+                <TabItem.Content>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <TreeView ItemsSource="{Binding}" Name="ArchiveTreeView" Padding="0,0,9,0" BorderBrush="{x:Null}" DockPanel.Dock="Left">
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
+                                    <TextBlock Text="{Binding Path=Title}" />
+                                </HierarchicalDataTemplate>
+                                <DataTemplate DataType="{x:Type local:PageResult}">
+                                    <TextBlock Text="{Binding Path=Title}">
+                                        <Hyperlink>
+                                            <TextBlock Text="{Binding Path=Title}"/>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+                    </ScrollViewer>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Trash">
+                <TabItem.Content>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <TreeView ItemsSource="{Binding}" Name="TrashTreeView" Padding="0,0,9,0" BorderBrush="{x:Null}" DockPanel.Dock="Left">
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
+                                    <TextBlock Text="{Binding Path=Title}" />
+                                </HierarchicalDataTemplate>
+                                <DataTemplate DataType="{x:Type local:PageResult}">
+                                    <TextBlock Text="{Binding Path=Title}">
+                                        <Hyperlink>
+                                            <TextBlock Text="{Binding Path=Title}"/>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+                    </ScrollViewer>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+        <TabControl Name="tabControl" Margin="5" DockPanel.Dock="Right"/>
+    </DockPanel>
+</ribbon:RibbonWindow>

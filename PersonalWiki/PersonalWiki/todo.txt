@@ -1,0 +1,28 @@
+todo
+----
+- haku/filtteröinti
+- export
+  - html
+  - txt
+- spellcheck
+- Auto-Naming of Notes
+  - Tired of inventing names? Let myNotes do it for you!
+* Live Word CountAnd it counts characters too.
+- tulostus
+- Minimization to system tray
+- jumptray
+- Search and replace
+- roskakori
+- arkisto
+- Full screen editing
+- View recently updated pages
+- Saved Workspaces
+  - Quit with all your windows open. Relaunch, and there they are again. Great for picking up where you left off.
+- last file and note reopened automatically on start
+- autosave
+- Search with highlighting
+- Fast full-text search
+- Incremental in-page search
+- import txt files
+- Quickly insert timestamps
+- check the history
