@@ -1,0 +1,158 @@
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.pdb
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.baml
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.g.cs
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\App.g.cs
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.cache
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.g.resources
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.Properties.Resources.resources
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\it09\Desktop\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.baml
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\App.g.cs
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.cache
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.g.resources
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.Properties.Resources.resources
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Sami\Desktop\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\it09\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\it09\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\App.g.cs
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.cache
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.lref
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.baml
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.g.resources
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.Properties.Resources.resources
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Sami\Desktop\20110407\20110324\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\App.g.cs
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.cache
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.lref
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.baml
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.g.resources
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.Properties.Resources.resources
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Sami\Desktop\20110407 – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.cache
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.lref
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.g.resources
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.Properties.Resources.resources
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\App.g.cs
+C:\Users\Sami\Desktop\ObservableCollection\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.baml
+C:\Users\Sami\Desktop\Toimiva – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\Toimiva – Kopio\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\App.g.cs
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.cache
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.lref
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.baml
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.g.resources
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.Properties.Resources.resources
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Sami\Desktop\list\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.pdb
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\App.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.cache
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_MarkupCompile.lref
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindow.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.g.resources
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki.Properties.Resources.resources
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\AboutTab.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\PageTab.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\RevisionTab.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\AboutTab.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\PageTab.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\RevisionTab.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\MainWindowResources.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\ReplaceTab.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\ReplaceTab.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindTab.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindTab.g.cs
