@@ -12,29 +12,25 @@ namespace PersonalWiki
 
         //if project is archived||if project is trash
         //todo:Error Getting Projects||Create new project
-        //todo: db dispose
         /// <summary>
         /// 
         /// </summary>
-        public ObservableCollection<ProjectResult> Projects
+        public ObservableCollection<ProjectResult> GetProjects()
         {
-            get{
-                var projects =
-                    from p in db.Project
-                    orderby p.ProjectTitle ascending
-                    select new ProjectResult
-                    {
-                        Id = p.ProjectId,
-                        Title = p.ProjectTitle,
-                        Pages = GetPages(p.ProjectId)
-                    };
-                return new ObservableCollection<ProjectResult>(projects);
-            }
+            var projects =
+                from p in db.Project
+                orderby p.ProjectTitle ascending
+                select new ProjectResult
+                {
+                    Id = p.ProjectId,
+                    Title = p.ProjectTitle,
+                    Pages = GetPages(p.ProjectId)
+                };
+            return new ObservableCollection<ProjectResult>(projects);
         }
 
         //if page is archived||if page is trash
         //todo:Error Getting Page||Create new page
-        //todo: db dispose
         /// <summary>
         /// 
         /// </summary>
@@ -87,28 +83,29 @@ namespace PersonalWiki
             return header.ToString();
         }
 
-        public bool updateTitle(int id)
+        public bool updateTitle(int id, string title)
         {
+            var page =
+                from p in db.Page
+                where p.PageId == id
+                select p;
+            page.Single().PageTitle = title;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                //todo:error handling
+            }
             return false;
         }
 
-/*        public void Dispose()
-        {
-
-            //pass true indicating managed resources can be freed as well e.g. our code called
-
-            //dispose instead of the .NET framework
-
-//            Dispose(true);
-//            db.Dispose();
-            //prevent Finalization since we already freed the resources
-
-            GC.SuppressFinalize(this);
-
-        }*/
         public void Dispose()
         {
-
+            db.Dispose();
+            db = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

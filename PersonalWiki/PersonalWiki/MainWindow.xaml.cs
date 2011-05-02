@@ -30,8 +30,10 @@ namespace PersonalWiki
             //todo:check if sql server ce is installed
             //todo:refresh treeView
             //todo:database and tabs from last time from ini file
-            DataProvider dp = new DataProvider();
-            this.ProjectsTreeView.DataContext = dp.Projects;
+            using (DataProvider dp = new DataProvider())
+            {
+                this.ProjectsTreeView.DataContext = dp.GetProjects();
+            }
         }
 
         private void ShowAboutTab(object sender, RoutedEventArgs e)
@@ -47,9 +49,13 @@ namespace PersonalWiki
 
         private void ShowPageTab(object sender, RoutedEventArgs e)
         {
-//            string header = dp.GetPageTabHeader(7);
-/*            if (!TabIsOpen(header))
-                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = header, Content = new View.PageTab(7) });*/
+            string header;
+            using (DataProvider dp = new DataProvider())
+            {
+                header = dp.GetPageTabHeader(7);
+            }
+            if (!string.IsNullOrWhiteSpace(header) && !TabIsOpen(header))
+                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = header, Content = new View.PageTab(7) });
 //            e.RoutedEvent.
             //            e.Parameter.ToString();
     //        this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = hl.CommandParameter.ToString()});
