@@ -8,7 +8,7 @@ namespace PersonalWiki
 {
     class DataProvider //: IDisposable
     {
-//        Database db = new Database();
+        Database db = new Database();
 
         //if project is archived||if project is trash
         //todo:Error Getting Projects||Create new project
@@ -19,7 +19,7 @@ namespace PersonalWiki
         public ObservableCollection<ProjectResult> Projects
         {
             get{
-                Database db = new Database();
+                //                Database db = new Database();
                 var projects =
                     from p in db.Project
                     orderby p.ProjectTitle ascending
@@ -43,7 +43,7 @@ namespace PersonalWiki
         /// <returns></returns>
         private ObservableCollection<PageResult> GetPages(int id)
         {
-            Database db = new Database();
+            //            Database db = new Database();
             var pages =
                 from p in db.Page
                 where p.ProjectId == id
@@ -58,7 +58,7 @@ namespace PersonalWiki
 
         public ObservableCollection<PageResult2> GetPage(int id)
         {
-            Database db = new Database();
+            //            Database db = new Database();
             var page =
                 from p in db.Page
                 join r in db.Revision
@@ -78,7 +78,7 @@ namespace PersonalWiki
 
         public string GetPageTabHeader(int id)
         {
-            Database db = new Database();
+            //            Database db = new Database();
             var header =
                 from p in db.Page
                 join pr in db.Project

@@ -20,7 +20,6 @@ namespace PersonalWiki
     /// </summary>
     public partial class MainWindow : RibbonWindow
     {
-        DataProvider dp = new DataProvider();
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +30,7 @@ namespace PersonalWiki
             //todo:check if sql server ce is installed
             //todo:refresh treeView
             //todo:database and tabs from last time from ini file
+            DataProvider dp = new DataProvider();
             this.ProjectsTreeView.DataContext = dp.Projects;
         }
 
