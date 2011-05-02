@@ -25,17 +25,17 @@ namespace PersonalWiki.View
         {
             InitializeComponent();
             this.id = id;
-            using (DataProvider dp = new DataProvider())
+/*            using (DataProvider dp = new DataProvider())
             {
                 this.DataContext = dp.GetPage(id);
             }
-        }
+*/        }
 
         private void textChanged(object sender, TextChangedEventArgs e)
         {
             if (!changed.IsVisible)
                 changed.Visibility = Visibility.Visible;
-            DataProvider dp = new DataProvider();
+//            DataProvider dp = new DataProvider();
             
         }
 

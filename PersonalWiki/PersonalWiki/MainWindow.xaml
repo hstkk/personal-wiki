@@ -12,7 +12,7 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Help" Executed="ShowAboutTab" />
-        <CommandBinding CanExecute="CommandBinding_CanExecute" Command="BrowseBack" Executed="ShowPageTab"/>
+        <CommandBinding Command="BrowseBack" Executed="ShowPageTab"/>
     </Window.CommandBindings>
     <DockPanel>
         <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">

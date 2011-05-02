@@ -6,8 +6,10 @@ using System.Collections.ObjectModel;
 
 namespace PersonalWiki
 {
-    class DataProvider : IDisposable
+    class DataProvider //: IDisposable
     {
+//        Database db = new Database();
+
         //if project is archived||if project is trash
         //todo:Error Getting Projects||Create new project
         //todo: db dispose
@@ -91,23 +93,22 @@ namespace PersonalWiki
 
         public bool updateTitle(int id)
         {
-            Database db = new Database();
             return false;
         }
 
-        public void Dispose()
+/*        public void Dispose()
         {
 
             //pass true indicating managed resources can be freed as well e.g. our code called
 
             //dispose instead of the .NET framework
 
-            Dispose(true);
-
+//            Dispose(true);
+//            db.Dispose();
             //prevent Finalization since we already freed the resources
 
             GC.SuppressFinalize(this);
 
-        }
+        }*/
     }
 }
