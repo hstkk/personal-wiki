@@ -38,9 +38,6 @@ namespace PersonalWiki
     partial void InsertRevision(Revision instance);
     partial void UpdateRevision(Revision instance);
     partial void DeleteRevision(Revision instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
     #endregion
 
         public Database() :
@@ -94,14 +91,6 @@ namespace PersonalWiki
 			get
 			{
 				return this.GetTable<Revision>();
-			}
-		}
-		
-		public System.Data.Linq.Table<User> User
-		{
-			get
-			{
-				return this.GetTable<User>();
 			}
 		}
 	}
@@ -461,11 +450,7 @@ namespace PersonalWiki
 		
 		private int _PageId;
 		
-		private int _Userid;
-		
 		private EntityRef<Page> _Page;
-		
-		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -479,14 +464,11 @@ namespace PersonalWiki
     partial void OnRevisionTimestampChanged();
     partial void OnPageIdChanging(int value);
     partial void OnPageIdChanged();
-    partial void OnUseridChanging(int value);
-    partial void OnUseridChanged();
     #endregion
 		
 		public Revision()
 		{
 			this._Page = default(EntityRef<Page>);
-			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -574,30 +556,6 @@ namespace PersonalWiki
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Userid", DbType="Int NOT NULL")]
-		public int Userid
-		{
-			get
-			{
-				return this._Userid;
-			}
-			set
-			{
-				if ((this._Userid != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUseridChanging(value);
-					this.SendPropertyChanging();
-					this._Userid = value;
-					this.SendPropertyChanged("Userid");
-					this.OnUseridChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Page_Revision", Storage="_Page", ThisKey="PageId", OtherKey="PageId", IsForeignKey=true)]
 		public Page Page
 		{
@@ -632,40 +590,6 @@ namespace PersonalWiki
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Revision", Storage="_User", ThisKey="Userid", OtherKey="UserId", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Revision.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Revision.Add(this);
-						this._Userid = value.UserId;
-					}
-					else
-					{
-						this._Userid = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -684,120 +608,6 @@ namespace PersonalWiki
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute()]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _UserId;
-		
-		private string _UserName;
-		
-		private EntitySet<Revision> _Revision;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIdChanging(int value);
-    partial void OnUserIdChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    #endregion
-		
-		public User()
-		{
-			this._Revision = new EntitySet<Revision>(new Action<Revision>(this.attach_Revision), new Action<Revision>(this.detach_Revision));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Revision", Storage="_Revision", ThisKey="UserId", OtherKey="Userid")]
-		public EntitySet<Revision> Revision
-		{
-			get
-			{
-				return this._Revision;
-			}
-			set
-			{
-				this._Revision.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Revision(Revision entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Revision(Revision entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 	}
 }
