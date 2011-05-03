@@ -39,13 +39,7 @@ namespace PersonalWiki
     partial void UpdateRevision(Revision instance);
     partial void DeleteRevision(Revision instance);
     #endregion
-
-        public Database() :
-            base(DatabasePath.Path, mappingSource)
-        {
-            OnCreated();
-        }
-
+		
 		public Database(string connection) : 
 				base(connection, mappingSource)
 		{
@@ -105,9 +99,9 @@ namespace PersonalWiki
 		
 		private string _PageTitle;
 		
-		private System.Nullable<byte> _PageArchived;
+		private System.Data.Linq.Binary _PageArchived;
 		
-		private System.Nullable<byte> _PageTrash;
+		private System.Data.Linq.Binary _PageTrash;
 		
 		private int _ProjectId;
 		
@@ -123,9 +117,9 @@ namespace PersonalWiki
     partial void OnPageIdChanged();
     partial void OnPageTitleChanging(string value);
     partial void OnPageTitleChanged();
-    partial void OnPageArchivedChanging(System.Nullable<byte> value);
+    partial void OnPageArchivedChanging(System.Data.Linq.Binary value);
     partial void OnPageArchivedChanged();
-    partial void OnPageTrashChanging(System.Nullable<byte> value);
+    partial void OnPageTrashChanging(System.Data.Linq.Binary value);
     partial void OnPageTrashChanged();
     partial void OnProjectIdChanging(int value);
     partial void OnProjectIdChanged();
@@ -178,8 +172,8 @@ namespace PersonalWiki
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PageArchived", DbType="TinyInt")]
-		public System.Nullable<byte> PageArchived
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PageArchived", DbType="Binary(1)")]
+		public System.Data.Linq.Binary PageArchived
 		{
 			get
 			{
@@ -198,8 +192,8 @@ namespace PersonalWiki
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PageTrash", DbType="TinyInt")]
-		public System.Nullable<byte> PageTrash
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PageTrash", DbType="Binary(1)")]
+		public System.Data.Linq.Binary PageTrash
 		{
 			get
 			{
