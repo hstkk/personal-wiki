@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.IO;
+
+using System.Data;
+using System;
+
 
 namespace PersonalWiki
 {
     class DataProvider : IDisposable
     {
-        Database db = new Database();
+/*        string strConn = string.Format("Data Source={0}", DatabasePath.Path);
+
+        IDbConnection conn = new System.Data.SqlServerCe.SqlCeConnection(strConStr);
+
+        Database db = new Database(conn);*/
+        Database db = new Database(@"Data Source=C:\Users\Sami\Desktop\Database.sdf.test");
+//        Database db = new Database();
 
         //if project is archived||if project is trash
         //todo:Error Getting Projects||Create new project
@@ -97,6 +108,39 @@ namespace PersonalWiki
             catch (Exception e)
             {
                 //todo:error handling
+            }
+            //todo:jos onnistuus
+            return false;
+        }
+
+        public bool addRevision(int id, string text)
+        {
+            Revision r = new Revision
+            {
+                PageId = id,
+                RevisionText = text,
+                RevisionTimestamp = DateTime.Now
+            };
+            db.Revision.InsertOnSubmit(r);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                //todo:error handling
+            }
+            //todo:jos onnistuus
+            return false;
+        }
+
+        //todo: create db, users removed from dbml
+        public bool createDatabase()
+        {
+            if (!File.Exists(DatabasePath.Path))
+            {
+                db.CreateDatabase();
+                //todo:jos onnistuus
             }
             return false;
         }

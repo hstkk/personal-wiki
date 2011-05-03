@@ -25,14 +25,15 @@ namespace PersonalWiki
             InitializeComponent();
 
             #region testPath
-            DatabasePath.Path = @"C:\Users\Sami\Desktop\Database.sdf";
+            DatabasePath.Path = @"C:\Users\Sami\Desktop\Database.sdf.test";
             #endregion
             //todo:check if sql server ce is installed
             //todo:refresh treeView
             //todo:database and tabs from last time from ini file
             using (DataProvider dp = new DataProvider())
             {
-                this.ProjectsTreeView.DataContext = dp.GetProjects();
+                dp.createDatabase();
+//                this.ProjectsTreeView.DataContext = dp.GetProjects();
             }
         }
 
