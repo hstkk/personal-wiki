@@ -17,7 +17,7 @@ namespace PersonalWiki
         IDbConnection conn = new System.Data.SqlServerCe.SqlCeConnection(strConStr);
 
         Database db = new Database(conn);*/
-        Database db = new Database(@"Data Source=C:\Users\Sami\Desktop\työnalla.sdf");
+        Database db = new Database(@"Data Source=C:\Users\Sami\Desktop\työnalla\Database.sdf");
 //        Database db = new Database();
 
         //if project is archived||if project is trash
