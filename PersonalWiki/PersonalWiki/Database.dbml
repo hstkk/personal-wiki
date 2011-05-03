@@ -1,20 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Database" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Table Name="Page">
     <Type Name="Page">
       <Column Name="PageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PageTitle" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="PageArchived" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="PageTrash" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="PageArchived" Type="System.Data.Linq.Binary" DbType="Binary(1)" CanBeNull="true" />
+      <Column Name="PageTrash" Type="System.Data.Linq.Binary" DbType="Binary(1)" CanBeNull="true" />
       <Column Name="ProjectId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Page_Revision" Member="Revision" ThisKey="PageId" OtherKey="PageId" Type="Revision" />
-      <Association Name="Project_Page" Member="Project" ThisKey="ProjectId" OtherKey="ProjectId" Type="Project" IsForeignKey="true" />
+      <Association Name="PageId" Member="Revision" ThisKey="PageId" OtherKey="PageId" Type="Revision" DeleteRule="NO ACTION" />
+      <Association Name="ProjectId" Member="Project" ThisKey="ProjectId" OtherKey="ProjectId" Type="Project" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="Project">
     <Type Name="Project">
       <Column Name="ProjectId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="Project_Page" Member="Page" ThisKey="ProjectId" OtherKey="ProjectId" Type="Page" />
+      <Association Name="ProjectId" Member="Page" ThisKey="ProjectId" OtherKey="ProjectId" Type="Page" DeleteRule="NO ACTION" />
     </Type>
   </Table>
   <Table Name="Revision">
@@ -23,7 +24,7 @@
       <Column Name="RevisionText" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="RevisionTimestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="PageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Page_Revision" Member="Page" ThisKey="PageId" OtherKey="PageId" Type="Page" IsForeignKey="true" />
+      <Association Name="PageId" Member="Page" ThisKey="PageId" OtherKey="PageId" Type="Page" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

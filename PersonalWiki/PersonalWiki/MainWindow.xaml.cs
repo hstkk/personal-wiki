@@ -32,8 +32,7 @@ namespace PersonalWiki
             //todo:database and tabs from last time from ini file
             using (DataProvider dp = new DataProvider())
             {
-                dp.createDatabase();
-//                this.ProjectsTreeView.DataContext = dp.GetProjects();
+                this.ProjectsTreeView.DataContext = dp.GetProjects();
             }
         }
 

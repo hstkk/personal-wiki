@@ -5,8 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.IO;
 
-using System.Data;
-using System;
+//using System.Data;
 
 
 namespace PersonalWiki
@@ -18,7 +17,7 @@ namespace PersonalWiki
         IDbConnection conn = new System.Data.SqlServerCe.SqlCeConnection(strConStr);
 
         Database db = new Database(conn);*/
-        Database db = new Database(@"Data Source=C:\Users\Sami\Desktop\Database.sdf.test");
+        Database db = new Database(@"Data Source=C:\Users\Sami\Desktop\työnalla.sdf");
 //        Database db = new Database();
 
         //if project is archived||if project is trash
