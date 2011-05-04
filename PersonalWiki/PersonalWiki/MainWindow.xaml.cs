@@ -36,15 +36,11 @@ namespace PersonalWiki
             }
         }
 
+        //todo: else aktivoi välilehti
         private void ShowAboutTab(object sender, RoutedEventArgs e)
         {
             if (!TabIsOpen("About"))
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "About", Content = new View.AboutTab() });
-            else
-            {
-                //todo:aktivoi välilehti
-//                this.tabControl.SelectedIndex=this.tabControl.
-            }
         }
 
         private void ShowPageTab(object sender, RoutedEventArgs e)
@@ -66,6 +62,19 @@ namespace PersonalWiki
             this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = id });
         }*/
 
+        //todo: else aktivoi välilehti
+        private void ShowNewPageTab(object sender, RoutedEventArgs e)
+        {
+            if (!TabIsOpen("New page"))
+                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "New page", Content = new View.NewPageTab() });
+        }
+
+        //todo: else aktivoi välilehti
+        private void ShowNewProjectTab(object sender, RoutedEventArgs e)
+        {
+            if (!TabIsOpen("New project"))
+                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "New project", Content = new View.NewProjectTab() });
+        }
 
         private bool TabIsOpen(string name)
         {

@@ -133,6 +133,45 @@ namespace PersonalWiki
             return false;
         }
 
+        public bool addProject(string title)
+        {
+            Project p = new Project
+            {
+                ProjectTitle = title
+            };
+            db.Project.InsertOnSubmit(p);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                //todo:error handling
+            }
+            //todo:jos onnistuus
+            return false;
+        }
+
+        public bool addPage(string title, int projectId)
+        {
+            Page p = new Page
+            {
+                PageTitle = title,
+                ProjectId = projectId
+            };
+            db.Page.InsertOnSubmit(p);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                //todo:error handling
+            }
+            //todo:jos onnistuus
+            return false;
+        }
+
         //todo: create db, users removed from dbml
         public bool createDatabase()
         {

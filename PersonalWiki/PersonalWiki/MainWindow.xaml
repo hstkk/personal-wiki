@@ -12,7 +12,10 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Help" Executed="ShowAboutTab" />
-        <CommandBinding Command="BrowseBack" Executed="ShowPageTab"/>
+        <CommandBinding Command="local:Commands.ShowPage" Executed="ShowPageTab"/>
+        <CommandBinding Command="local:Commands.NewPage" Executed="ShowNewPageTab" />
+        <CommandBinding Command="local:Commands.NewProject" Executed="ShowNewProjectTab" />
+
     </Window.CommandBindings>
     <DockPanel>
         <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
@@ -52,9 +55,11 @@
                 <ribbon:RibbonGroup x:Name="New"
                                     Header="New">
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\document-new.png"
-                                         Label="Page"/>
+                                         Label="Page"
+                                         Command="local:Commands.NewPage" />
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\folder-new.png"
-                                         Label="Project"/>
+                                         Label="Project"
+                                         Command="local:Commands.NewProject" />
                 </ribbon:RibbonGroup>
                 <ribbon:RibbonGroup x:Name="Clipboard"
                                     Header="Clipboard">
@@ -82,10 +87,10 @@
                 <ribbon:RibbonGroup x:Name="Editing" Header="Editing">
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-find.png"
                                          Label="Find"
-                                         Command="Find"/>
+                                         Command="Find" />
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-find-replace.png"
                                          Label="Replace"
-                                         Command="Replace"/>
+                                         Command="Replace" />
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\edit-select-all.png"
                                          Label="Select all"
                                          Command="SelectAll" />
@@ -96,14 +101,19 @@
             <TabItem Header="Projects">
                 <TabItem.Content>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <TreeView ItemsSource="{Binding}" Name="ProjectsTreeView" Padding="0,0,9,0" BorderBrush="{x:Null}" DockPanel.Dock="Left">
+                        <TreeView ItemsSource="{Binding}"
+                                  Name="ProjectsTreeView"
+                                  Padding="0,0,9,0"
+                                  BorderBrush="{x:Null}"
+                                  DockPanel.Dock="Left"
+                                  >
                             <TreeView.Resources>
                                 <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
                                     <TextBlock Text="{Binding Path=Title}" />
                                 </HierarchicalDataTemplate>
                                 <DataTemplate DataType="{x:Type local:PageResult}">
                                     <TextBlock>
-                                        <Hyperlink  Command="BrowseBack" CommandParameter="{Binding Path=Id}">
+                                        <Hyperlink Command="local:Commands.ShowPage" CommandParameter="{Binding Path=Id}">
                                             <TextBlock Text="{Binding Path=Title}"/>
                                         </Hyperlink>
                                     </TextBlock>
