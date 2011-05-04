@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\Commands.cs" />
     <Compile Include="Database.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +88,12 @@
     </Compile>
     <Compile Include="View\FindTab.xaml.cs">
       <DependentUpon>FindTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewPageTab.xaml.cs">
+      <DependentUpon>NewPageTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewProjectTab.xaml.cs">
+      <DependentUpon>NewProjectTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PageTab.xaml.cs">
       <DependentUpon>PageTab.xaml</DependentUpon>
@@ -122,6 +129,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FindTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewPageTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewProjectTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
