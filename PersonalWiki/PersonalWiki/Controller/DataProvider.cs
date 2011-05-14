@@ -25,7 +25,7 @@ namespace PersonalWiki
         /// <summary>
         /// 
         /// </summary>
-        public ObservableCollection<ProjectResult> GetProjects()
+        public ObservableCollection<ProjectResult> GetProjectsTree()
         {
             var projects =
                 from p in db.Project
@@ -170,6 +170,19 @@ namespace PersonalWiki
             }
             //todo:jos onnistuus
             return false;
+        }
+
+        private ObservableCollection<PageResult> GetProjects()
+        {
+            var projects =
+                from p in db.Project
+                orderby p.ProjectTitle
+                select new PageResult
+                {
+                    Id = p.ProjectId,
+                    Title = p.ProjectTitle
+                };
+            return new ObservableCollection<PageResult>(projects);
         }
 
         //todo: create db, users removed from dbml

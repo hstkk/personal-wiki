@@ -83,6 +83,7 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="Model\Copy of PageResult.cs" />
+    <Compile Include="Model\RefreshUi.cs" />
     <Compile Include="View\AboutTab.xaml.cs">
       <DependentUpon>AboutTab.xaml</DependentUpon>
     </Compile>
