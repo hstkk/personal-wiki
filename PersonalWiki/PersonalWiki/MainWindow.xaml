@@ -12,7 +12,7 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Help" Executed="ShowAboutTab" />
-        <CommandBinding Command="local:Commands.ShowPage" Executed="ShowPageTab"/>
+        <CommandBinding Command="local:Commands.ShowPage" Executed="ShowPageTab" />
         <CommandBinding Command="local:Commands.NewPage" Executed="ShowNewPageTab" />
         <CommandBinding Command="local:Commands.NewProject" Executed="ShowNewProjectTab" />
 

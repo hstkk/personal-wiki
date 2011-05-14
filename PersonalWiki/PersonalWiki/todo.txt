@@ -26,3 +26,4 @@ todo
 - import txt files
 - Quickly insert timestamps
 - check the history
+- ui refresh

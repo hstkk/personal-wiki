@@ -22,6 +22,10 @@ namespace PersonalWiki.View
         public NewPageTab()
         {
             InitializeComponent();
+            using (DataProvider dp = new DataProvider())
+            {
+                this.combobox.DataContext = dp.GetProjectsTree();
+            }
         }
     }
 }

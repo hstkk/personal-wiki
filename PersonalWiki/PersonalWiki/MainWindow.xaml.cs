@@ -25,14 +25,16 @@ namespace PersonalWiki
             InitializeComponent();
 
             #region testPath
-            DatabasePath.Path = @"C:\Users\Sami\Desktop\Database.sdf.test";
+            DatabasePath.Path = @"C:\Users\Sami\Desktop\työnalla\Database.sdf";
             #endregion
             //todo:check if sql server ce is installed
             //todo:refresh treeView
             //todo:database and tabs from last time from ini file
             using (DataProvider dp = new DataProvider())
             {
-                this.ProjectsTreeView.DataContext = dp.GetProjects();
+                dp.addRevision(1, "Lorem ipsum...");
+//                dp.addPage("toka", 3);
+                this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
             }
         }
 
@@ -43,24 +45,21 @@ namespace PersonalWiki
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "About", Content = new View.AboutTab() });
         }
 
-        private void ShowPageTab(object sender, RoutedEventArgs e)
+        private void ShowPageTab(object sender, ExecutedRoutedEventArgs e)
         {
+            int id;
+            int.TryParse(e.Parameter.ToString(), out id);
+            e.Parameter.ToString();
+/*            FrameworkElement fe = e.Source as FrameworkElement;
+            fe.Name.ToString();*/
             string header;
             using (DataProvider dp = new DataProvider())
             {
                 header = dp.GetPageTabHeader(7);
             }
             if (!string.IsNullOrWhiteSpace(header) && !TabIsOpen(header))
-                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = header, Content = new View.PageTab(7) });
-//            e.RoutedEvent.
-            //            e.Parameter.ToString();
-    //        this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = hl.CommandParameter.ToString()});
+                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = /*header*/id, Content = new View.PageTab(id)});
         }
-
-/*        private void ShowPageTab(int id)
-        {
-            this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = id });
-        }*/
 
         //todo: else aktivoi välilehti
         private void ShowNewPageTab(object sender, RoutedEventArgs e)
@@ -84,7 +83,20 @@ namespace PersonalWiki
                     select t;
             if (q.Count().Equals(0))
                 open = false;
+            else
+            {
+                MessageBox.Show(this,name+" is already open!","Warning!");
+            }
             return open;
+        }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+/*            if (e.Parameter != null)
+                this.IsEnabled = true;
+            else
+                this.IsEnabled = false;*/
+            this.IsEnabled = true;
         }
     }
 }
