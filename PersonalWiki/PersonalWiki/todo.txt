@@ -27,3 +27,4 @@ todo
 - Quickly insert timestamps
 - check the history
 - ui refresh
+command binding can execute

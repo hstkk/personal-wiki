@@ -46,5 +46,20 @@ namespace PersonalWiki
                 return showPage;
             }
         }
+
+        private static RoutedUICommand closeTab;
+        /// <summary>
+        /// Returns the command that, when invoked, attempts
+        /// to remove this workspace from the user interface.
+        /// </summary>
+        public static ICommand CloseTab
+        {
+            get
+            {
+                if (closeTab == null)
+                closeTab = new RoutedUICommand("Close tab", "CloseTab", typeof(Commands));
+                return closeTab;
+            }
+        }
     }
 }

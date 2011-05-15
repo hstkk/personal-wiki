@@ -32,13 +32,13 @@ namespace PersonalWiki
             //todo:database and tabs from last time from ini file
             using (DataProvider dp = new DataProvider())
             {
-                dp.addRevision(1, "Lorem ipsum...");
-//                dp.addPage("toka", 3);
                 this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
             }
         }
 
-        //todo: else aktivoi välilehti
+        /// <summary>
+        /// Opens about tab
+        /// </summary>
         private void ShowAboutTab(object sender, RoutedEventArgs e)
         {
             if (!TabIsOpen("About"))
@@ -50,8 +50,6 @@ namespace PersonalWiki
             int id;
             int.TryParse(e.Parameter.ToString(), out id);
             e.Parameter.ToString();
-/*            FrameworkElement fe = e.Source as FrameworkElement;
-            fe.Name.ToString();*/
             string header;
             using (DataProvider dp = new DataProvider())
             {
@@ -61,20 +59,37 @@ namespace PersonalWiki
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = /*header*/id, Content = new View.PageTab(id)});
         }
 
-        //todo: else aktivoi välilehti
+        /// <summary>
+        /// Opens new page tab
+        /// </summary>
         private void ShowNewPageTab(object sender, RoutedEventArgs e)
         {
             if (!TabIsOpen("New page"))
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "New page", Content = new View.NewPageTab() });
         }
 
-        //todo: else aktivoi välilehti
+        /// <summary>
+        /// Opens new project tab
+        /// </summary>
         private void ShowNewProjectTab(object sender, RoutedEventArgs e)
         {
             if (!TabIsOpen("New project"))
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "New project", Content = new View.NewProjectTab() });
         }
 
+        private void CloseTab(object sender, RoutedEventArgs e)
+        {
+            TabItem tabItem = e.Source as TabItem;
+            if (tabItem != null)
+                //todo:error
+                this.tabControl.Items.Remove(tabItem);
+        }
+
+        /// <summary>
+        /// Checks if tab is already open
+        /// </summary>
+        /// <param name="name">Tab name</param>
+        /// <returns>false if tab is already open, else true</returns>
         private bool TabIsOpen(string name)
         {
             bool open = true;
@@ -84,19 +99,8 @@ namespace PersonalWiki
             if (q.Count().Equals(0))
                 open = false;
             else
-            {
                 MessageBox.Show(this,name+" is already open!","Warning!");
-            }
             return open;
-        }
-
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-/*            if (e.Parameter != null)
-                this.IsEnabled = true;
-            else
-                this.IsEnabled = false;*/
-            this.IsEnabled = true;
         }
     }
 }
