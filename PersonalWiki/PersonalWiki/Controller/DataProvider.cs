@@ -66,6 +66,7 @@ namespace PersonalWiki
                 from p in db.Page
                 join r in db.Revision
                 on p.PageId equals r.PageId
+                orderby r.RevisionTimestamp descending
                 where p.PageId == id
                 select new PageResult2
                 {
@@ -76,7 +77,18 @@ namespace PersonalWiki
                     _Archived = p.PageArchived.Value,
                     _Trash = p.PageTrash.Value*/
                 };
-            return new ObservableCollection<PageResult2>(page);
+            if(page.Count().Equals(0))
+                page=
+                    from p in db.Page
+                    select new PageResult2
+                    {
+                        Id = p.PageId,
+                        Title = p.PageTitle,
+                        /*_Archived = p.PageArchived.Value,
+                        _Trash = p.PageTrash.Value*/
+                    };
+
+            return new ObservableCollection<PageResult2>(page.Take(1));
         }
 
         public string GetPageTabHeader(int id)

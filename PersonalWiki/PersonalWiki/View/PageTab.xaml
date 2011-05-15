@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.CommandBindings>
-        <CommandBinding Command="local:Commands.TextToSpeech" Executed="TextToSpeech" />
+        <CommandBinding Command="local:Commands.ShowRevisions" Executed="ShowRevisionsDialog" />
     </UserControl.CommandBindings>
     <DockPanel LastChildFill="True">
         <TextBox Name="title"
@@ -16,15 +16,13 @@
                  Text="{Binding Path=Title}"
                  BorderBrush="{x:Null}"
                  DockPanel.Dock="Top"
-                 TextChanged="titleChanged" />
+                 TextChanged="titleChanged"
+                 GotFocus="titleTextGotFocus" />
         <DockPanel DockPanel.Dock="Top">
-            <TextBlock FontStyle="Italic"
+            <TextBlock Name="date"
+                       FontStyle="Italic"
                        Foreground="Gray"
                        Text="{Binding Path=Date, StringFormat=HH:mm dd.MM.yyyy}" />
-            <TextBlock Name="changed"
-                       Text="*"
-                       FontWeight="Bold"
-                       Visibility="Hidden" />
             <TextBlock TextAlignment="Right">
                 <Hyperlink Command="local:Commands.ShowRevisions">
                     Revisions
@@ -40,6 +38,7 @@
                  VerticalScrollBarVisibility="Auto"
                  AllowDrop="True"
                  AcceptsReturn="True"
-                 TextChanged="textChanged"/>
+                 TextChanged="textChanged" 
+                 GotFocus="titleTextGotFocus"/>
     </DockPanel>
 </UserControl>
