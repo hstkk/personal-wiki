@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Speech.Synthesis;
 
 namespace PersonalWiki.View
 {
@@ -38,8 +39,13 @@ namespace PersonalWiki.View
         private void titleChanged(object sender, TextChangedEventArgs e)
         {
             if(!string.IsNullOrWhiteSpace(title.Text))
-            using (DataProvider dp = new DataProvider())
-                dp.updateTitle(id, title.Text);
+                using (DataProvider dp = new DataProvider())
+                    dp.updateTitle(id, title.Text);
+        }
+
+        private void ShowRevisionsDialog(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

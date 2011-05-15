@@ -4,6 +4,14 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 		<!-- Resources scoped at the Application level should be defined here. -->
-        
     </Application.Resources>
+    <JumpList.JumpList>
+        <JumpList ShowFrequentCategory="True" ShowRecentCategory="False">
+            <JumpTask Title="Hostikka.com"
+                      Description="Open Hostikka.com"
+                      Arguments="http://hostikka.com"
+                      ApplicationPath="%PROGRAMFILES%\Internet Explorer\iexplore.exe"
+                      IconResourcePath="%PROGRAMFILES%\Internet Explorer\iexplore.exe"/>
+        </JumpList>
+    </JumpList.JumpList>
 </Application>

@@ -14,9 +14,7 @@ namespace PersonalWiki
             get
             {
                 if (newPage == null)
-                {
                     newPage = new RoutedUICommand("New Page", "NewPage", typeof(Commands));
-                }
                 return newPage;
             }
         }
@@ -27,9 +25,7 @@ namespace PersonalWiki
             get
             {
                 if (newProject == null)
-                {
                     newProject = new RoutedUICommand("New Project", "NewProject", typeof(Commands));
-                }
                 return newProject;
             }
         }
@@ -40,9 +36,7 @@ namespace PersonalWiki
             get
             {
                 if (showPage == null)
-                {
                     showPage = new RoutedUICommand("Show Page", "ShowPage", typeof(Commands));
-                }
                 return showPage;
             }
         }
@@ -57,8 +51,20 @@ namespace PersonalWiki
             get
             {
                 if (closeTab == null)
-                closeTab = new RoutedUICommand("Close tab", "CloseTab", typeof(Commands));
+                    closeTab = new RoutedUICommand("Close tab", "CloseTab", typeof(Commands));
                 return closeTab;
+            }
+        }
+
+        
+        private static RoutedUICommand showRevisions;
+        public static ICommand ShowRevisions
+        {
+            get
+            {
+                if (showRevisions == null)
+                    showRevisions = new RoutedUICommand("Show revisions", "ShowRevisions", typeof(Commands));
+                return showRevisions;
             }
         }
     }

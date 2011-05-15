@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\App.xaml
-91997637903
+91098863582
 
-21569276028
+21-861734894
 15670652906
-MainWindow.xaml;MainWindowResources.xaml;View\AboutTab.xaml;View\FindTab.xaml;View\NewPageTab.xaml;View\NewProjectTab.xaml;View\PageTab.xaml;View\ReplaceTab.xaml;View\RevisionTab.xaml;
+MainWindow.xaml;MainWindowResources.xaml;View\AboutTab.xaml;View\NewProjectDialog.xaml;View\FindTab.xaml;View\NewPageDialog.xaml;View\PageTab.xaml;View\ReplaceTab.xaml;View\RevisionTab.xaml;
 
 True
 

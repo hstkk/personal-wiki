@@ -156,7 +156,8 @@ C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\Rep
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\ReplaceTab.g.cs
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindTab.baml
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindTab.g.cs
-C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewPageTab.baml
-C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewProjectTab.baml
-C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewPageTab.g.cs
-C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewProjectTab.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewPageDialog.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewPageDialog.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewProjectDialog.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\NewProjectDialog.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\App.baml

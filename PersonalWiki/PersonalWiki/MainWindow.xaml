@@ -13,8 +13,8 @@
     <Window.CommandBindings>
         <CommandBinding Command="Help" Executed="ShowAboutTab" />
         <CommandBinding Command="local:Commands.ShowPage" Executed="ShowPageTab" />
-        <CommandBinding Command="local:Commands.NewPage" Executed="ShowNewPageTab" />
-        <CommandBinding Command="local:Commands.NewProject" Executed="ShowNewProjectTab" />
+        <CommandBinding Command="local:Commands.NewPage" Executed="ShowNewPageDialog" CanExecute="ShowNewPageDialogCanExecute"/>
+        <CommandBinding Command="local:Commands.NewProject" Executed="ShowNewProjectDialog" />
         <CommandBinding Command="local:Commands.CloseTab" Executed="CloseTab" />
     </Window.CommandBindings>
     <DockPanel>
@@ -164,7 +164,6 @@
                 </TabItem.Content>
             </TabItem>
         </TabControl>
-        <TabControl Name="tabControl" Margin="5" DockPanel.Dock="Right"
-                    ItemTemplate="{StaticResource ClosableTab}"/>
+        <TabControl Name="tabControl" Margin="5" DockPanel.Dock="Right" />
     </DockPanel>
 </ribbon:RibbonWindow>

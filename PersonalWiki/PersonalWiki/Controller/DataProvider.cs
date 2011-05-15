@@ -185,6 +185,42 @@ namespace PersonalWiki
             return new ObservableCollection<PageResult>(projects);
         }
 
+        public bool ProjectExists()
+        {
+            bool exist = true;
+            var projects =
+                from p in db.Project
+                select p;
+            if (projects.Count().Equals(0))
+                exist = false;
+            return exist;
+        }
+
+        public bool ProjectExists(string projectTitle)
+        {
+            bool exist = true;
+            var projects =
+                from p in db.Project
+                where p.ProjectTitle.Equals(projectTitle)
+                select p;
+            if (projects.Count().Equals(0))
+                exist = false;
+            return exist;
+        }
+
+        public bool PageExists(int projectId, string pageTitle)
+        {
+            bool exist = true;
+            var pages =
+                from p in db.Page
+                where p.PageTitle.Equals(pageTitle) &&
+                p.ProjectId.Equals(projectId)
+                select p;
+            if (pages.Count().Equals(0))
+                exist = false;
+            return exist;
+        }
+
         //todo: create db, users removed from dbml
         public bool createDatabase()
         {
