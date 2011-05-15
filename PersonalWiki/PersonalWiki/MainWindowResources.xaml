@@ -18,28 +18,7 @@
         </Style.Triggers>
     </Style>
 
-    <DataTemplate x:Key="ClosableTab">
-        <WrapPanel>
-<!--            <TextBlock Text="{Binding HeaderText}"/>-->
-            <Button Content="X" Command="local:Commands.CloseTab" />
-        </WrapPanel>
-    </DataTemplate>
 
-    <Style TargetType="{x:Type TabItem}">
-        <Setter Property="HeaderTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Button Content="{Binding Path=HeaderText}" Command="local:Commands.CloseTab" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Body}"/>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="IsSelected" Value="{Binding Path=IsSelected}"/>
-    </Style>
+
+
 </ResourceDictionary>

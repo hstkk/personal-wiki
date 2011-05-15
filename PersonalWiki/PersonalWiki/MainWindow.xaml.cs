@@ -25,7 +25,7 @@ namespace PersonalWiki
             InitializeComponent();
 
             #region testPath
-            DatabasePath.Path = @"C:\Users\Sami\Desktop\työnalla\Database.sdf";
+            DatabasePath.Path = @"C:\Users\Sami\Desktop\työnalla\Database – empty.sdf";
             #endregion
             //todo:check if sql server ce is installed
             //todo:refresh treeView
@@ -60,21 +60,27 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// Opens new page tab
+        /// Shows NewPageDialog, if dialog result is true calls refrefsProjectsTreeview method
         /// </summary>
-        private void ShowNewPageTab(object sender, RoutedEventArgs e)
+        private void ShowNewPageDialog(object sender, RoutedEventArgs e)
         {
-            if (!TabIsOpen("New page"))
-                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "New page", Content = new View.NewPageTab() });
+            View.NewPageDialog dlg = new View.NewPageDialog();
+            dlg.Owner = this;
+            dlg.ShowDialog();
+            if (dlg.DialogResult == true)
+                refreshProjectsTreeview();
         }
 
         /// <summary>
-        /// Opens new project tab
+        /// Shows NewProjectDialog, if dialog result is true calls refrefsProjectsTreeview method
         /// </summary>
-        private void ShowNewProjectTab(object sender, RoutedEventArgs e)
+        private void ShowNewProjectDialog(object sender, RoutedEventArgs e)
         {
-            if (!TabIsOpen("New project"))
-                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "New project", Content = new View.NewProjectTab() });
+            View.NewProjectDialog dlg = new View.NewProjectDialog();
+            dlg.Owner = this;
+            dlg.ShowDialog();
+            if (dlg.DialogResult == true)
+                refreshProjectsTreeview();
         }
 
         private void CloseTab(object sender, RoutedEventArgs e)
@@ -101,6 +107,26 @@ namespace PersonalWiki
             else
                 MessageBox.Show(this,name+" is already open!","Warning!");
             return open;
+        }
+
+        /// <summary>
+        /// Updates ProjectsTreeview DataContext
+        /// </summary>
+        private void refreshProjectsTreeview()
+        {
+            using (DataProvider dp = new DataProvider())
+            {
+                this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
+            }
+        }
+
+        /// <summary>
+        /// If projects does't exist can't create new page
+        /// </summary>
+        private void ShowNewPageDialogCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            using (DataProvider dp = new DataProvider())
+                e.CanExecute=dp.ProjectExists();
         }
     }
 }
