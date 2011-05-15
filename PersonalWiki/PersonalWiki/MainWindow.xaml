@@ -8,14 +8,14 @@
 		Width="640" Height="480"
         Icon="tango-accessories-text-editor.ico">
     <Window.Resources>
-<!--        <ResourceDictionary Source="MainWindowResources.xaml"/>-->
+        <ResourceDictionary Source="MainWindowResources.xaml"/>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Help" Executed="ShowAboutTab" />
         <CommandBinding Command="local:Commands.ShowPage" Executed="ShowPageTab" />
         <CommandBinding Command="local:Commands.NewPage" Executed="ShowNewPageTab" />
         <CommandBinding Command="local:Commands.NewProject" Executed="ShowNewProjectTab" />
-
+        <CommandBinding Command="local:Commands.CloseTab" Executed="CloseTab" />
     </Window.CommandBindings>
     <DockPanel>
         <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
@@ -164,6 +164,7 @@
                 </TabItem.Content>
             </TabItem>
         </TabControl>
-        <TabControl Name="tabControl" Margin="5" DockPanel.Dock="Right"/>
+        <TabControl Name="tabControl" Margin="5" DockPanel.Dock="Right"
+                    ItemTemplate="{StaticResource ClosableTab}"/>
     </DockPanel>
 </ribbon:RibbonWindow>
