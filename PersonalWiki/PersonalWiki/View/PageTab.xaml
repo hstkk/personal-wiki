@@ -7,7 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.CommandBindings>
-        <CommandBinding Command="local:Commands.ShowRevisions" Executed="ShowRevisionsDialog" />
+        <CommandBinding Command="local:Commands.ShowRevisions" Executed="ShowRevisionsDialog" CanExecute="ShowRevisionsCanExecute" />
+        <CommandBinding Command="Find" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
+        <CommandBinding Command="Replace" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
+        <CommandBinding Command="Print" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
     </UserControl.CommandBindings>
     <DockPanel LastChildFill="True">
         <TextBox Name="title"

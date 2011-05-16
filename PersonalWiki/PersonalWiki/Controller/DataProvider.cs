@@ -91,6 +91,20 @@ namespace PersonalWiki
             return new ObservableCollection<PageResult2>(page.Take(1));
         }
 
+        public ObservableCollection<PageResult2> GetRevisions(int id)
+        {
+            var page =
+                from r in db.Revision
+                orderby r.RevisionTimestamp descending
+                where r.PageId == id
+                select new PageResult2
+                {
+                    Text = r.RevisionText,
+                    Date = r.RevisionTimestamp
+                };
+            return new ObservableCollection<PageResult2>(page.Take(1));
+        }
+
         public string GetPageTabHeader(int id)
         {
             var header =
