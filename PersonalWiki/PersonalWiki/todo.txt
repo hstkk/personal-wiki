@@ -19,7 +19,6 @@ todo
 - Saved Workspaces
   - Quit with all your windows open. Relaunch, and there they are again. Great for picking up where you left off.
 - last file and note reopened automatically on start
-- autosave
 - Search with highlighting
 - Fast full-text search
 - Incremental in-page search
@@ -28,3 +27,6 @@ todo
 - check the history
 - ui refresh
 command binding can execute
+
+wrap
+font

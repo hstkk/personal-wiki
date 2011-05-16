@@ -1,0 +1,14 @@
+﻿<Window x:Class="PersonalWiki.View.RevisionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RevisionDialog" Height="300" Width="300">
+    <Grid>
+        <TextBlock TextWrapping="Wrap" FontWeight="Bold" />
+        <Separator/>
+        <DataGrid ItemsSource="{Binding Revisions}"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserResizeRows="False"
+                  CanUserSortColumns="True" />
+    </Grid>
+</Window>

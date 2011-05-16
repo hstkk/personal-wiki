@@ -16,15 +16,20 @@ using System.Windows.Threading;
 
 namespace PersonalWiki.View
 {
+    public delegate void FoundEventHandler(object sender, EventArgs e);
+    public delegate void ReplacedEventHandler(object sender, EventArgs e);
+
     /// <summary>
     /// Interaction logic for PageTab.xaml
     /// </summary>
     public partial class PageTab : UserControl
     {
+        #region initialize
         private int id;
         private bool _textChanged, _titleChanged, _gotFocus;
-        DispatcherTimer timer;
+        private DispatcherTimer timer;
 
+        //todo:suljettaessa tarkista onko tallennettu, 
         public PageTab(int id)
         {
             InitializeComponent();
@@ -38,7 +43,9 @@ namespace PersonalWiki.View
             _titleChanged = false;
             _gotFocus = false;
         }
+        #endregion
 
+        #region events
         /// <summary>
         /// 
         /// </summary>
@@ -56,9 +63,7 @@ namespace PersonalWiki.View
             _textChanged = false;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        //todo:validation
         private void titleChanged(object sender, TextChangedEventArgs e)
         {
             if (_gotFocus && !_titleChanged && !string.IsNullOrWhiteSpace(title.Text))
@@ -80,11 +85,6 @@ namespace PersonalWiki.View
             }
         }
 
-        private void ShowRevisionsDialog(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         //binding aiheuttaa turhaan textchanged eventin sen ehkäisemiseksi
         /// <summary>
         /// 
@@ -93,5 +93,61 @@ namespace PersonalWiki.View
         {
             _gotFocus = true;
         }
+
+        private void onFound(object sender, EventArgs e)
+        {
+            View.FindReplaceDialog dlg = (View.FindReplaceDialog)sender;
+            text.Select(dlg.Index, dlg.Lenght);
+        }
+
+        private void onReplaced(object sender, EventArgs e)
+        {
+            View.FindReplaceDialog dlg = (View.FindReplaceDialog)sender;
+            text.Text = dlg.Text.Text;
+        }
+        #endregion
+
+        #region commands
+        private void ShowRevisionsDialog(object sender, RoutedEventArgs e)
+        {
+            View.RevisionDialog dlg = new View.RevisionDialog(id);
+            dlg.ShowDialog();
+            if (dlg.DialogResult == true)
+                using (DataProvider dp = new DataProvider())
+                    this.DataContext = dp.GetPage(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ShowFindReplaceDialog(object sender, RoutedEventArgs e)
+        {
+            View.FindReplaceDialog dlg = new View.FindReplaceDialog(text);
+            dlg.Found += new FoundEventHandler(onFound);
+            dlg.Replaced += new FoundEventHandler(onReplaced);
+            dlg.Show();
+            if (dlg.DialogResult == true)
+                text = dlg.Text;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void textCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (text.Text.Length > 0)
+                e.CanExecute = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ShowRevisionsCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            using (DataProvider dp = new DataProvider())
+                if (dp.GetRevisions(id).Count != 0)
+                    e.CanExecute = true;
+        }
+        #endregion
     }
 }

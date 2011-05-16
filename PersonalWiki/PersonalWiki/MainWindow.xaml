@@ -16,6 +16,7 @@
         <CommandBinding Command="local:Commands.NewPage" Executed="ShowNewPageDialog" CanExecute="ShowNewPageDialogCanExecute"/>
         <CommandBinding Command="local:Commands.NewProject" Executed="ShowNewProjectDialog" />
         <CommandBinding Command="local:Commands.CloseTab" Executed="CloseTab" />
+        <CommandBinding Command="Find" Executed="ShowAboutTab" />
     </Window.CommandBindings>
     <DockPanel>
         <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
@@ -27,12 +28,22 @@
                     <ribbon:RibbonApplicationMenuItem Header="Open"
                                                       ImageSource="Images\32x32\document-open.png"
                                                       Command="Open" />
-                    <ribbon:RibbonApplicationMenuItem Header="Save"
+                    <ribbon:RibbonSeparator/>
+                    <ribbon:RibbonApplicationMenuItem Header="Import"
+                                                      ImageSource="Images\32x32\document-open.png"
+                                                      Command="Open" />
+                    <ribbon:RibbonApplicationMenuItem Header="Export as..."
+                                                      ImageSource="Images\32x32\document-save-as.png">
+                        <ribbon:RibbonApplicationMenuItem Header="txt"
                                                       ImageSource="Images\32x32\document-save.png"
-                                                      Command="Save" />
-                    <ribbon:RibbonApplicationMenuItem Header="Save as..."
-                                                      ImageSource="Images\32x32\document-save-as.png" 
-                                                      Command="SaveAs" />
+                                                      Command="Open" />
+                        <ribbon:RibbonApplicationMenuItem Header="xps"
+                                                      ImageSource="Images\32x32\document-save.png"
+                                                      Command="Open" />
+                        <ribbon:RibbonApplicationMenuItem Header="pdf"
+                                                      ImageSource="Images\32x32\document-save.png"
+                                                      Command="Open" />
+                    </ribbon:RibbonApplicationMenuItem>
                     <ribbon:RibbonSeparator/>
                     <ribbon:RibbonApplicationMenuItem Header="Page settings"
                                                       ImageSource="Images\32x32\document-properties.png"
@@ -75,10 +86,13 @@
                                          ToolTipTitle="Copy (Ctrl+C)"
                                          ToolTipDescription="Copies the selected content on to the clipboard."/>
                 </ribbon:RibbonGroup>
-                <ribbon:RibbonGroup x:Name="Font"
-                                    Header="Font">
-                    <ribbon:RibbonComboBox />
-                    <ribbon:RibbonComboBox />
+                <ribbon:RibbonGroup x:Name="Text"
+                                    Header="Text">
+                    <WrapPanel>
+                        <ribbon:RibbonComboBox />
+                        <ribbon:RibbonComboBox />
+                    </WrapPanel>
+                    <ribbon:RibbonCheckBox Label="Wrap"/>
                     <!--<ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-bold.png"/>
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-italic.png"/>
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-underline.png"/>

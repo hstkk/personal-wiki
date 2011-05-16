@@ -90,20 +90,17 @@
     <Compile Include="View\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FindTab.xaml.cs">
-      <DependentUpon>FindTab.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\NewPageDialog.xaml.cs">
       <DependentUpon>NewPageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PageTab.xaml.cs">
       <DependentUpon>PageTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ReplaceTab.xaml.cs">
-      <DependentUpon>ReplaceTab.xaml</DependentUpon>
+    <Compile Include="View\RevisionDialog.xaml.cs">
+      <DependentUpon>RevisionDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RevisionTab.xaml.cs">
-      <DependentUpon>RevisionTab.xaml</DependentUpon>
+    <Compile Include="View\FindReplaceDialog.xaml.cs">
+      <DependentUpon>FindReplaceDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -133,10 +130,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\FindTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\NewPageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,11 +138,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ReplaceTab.xaml">
+    <Page Include="View\RevisionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RevisionTab.xaml">
+    <Page Include="View\FindReplaceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,7 +161,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Diagrams\ClassDiagram1.cd" />
+    <None Include="Diagrams\ClassDiagram2.cd" />
     <None Include="Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>
@@ -292,9 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16x16\media-playback-start.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
