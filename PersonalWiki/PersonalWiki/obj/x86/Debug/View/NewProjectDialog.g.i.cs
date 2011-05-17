@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 using Microsoft.Windows.Controls;
+using PersonalWiki;
 using PersonalWiki.rules;
 using System;
 using System.Diagnostics;

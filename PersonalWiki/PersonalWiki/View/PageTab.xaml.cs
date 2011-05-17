@@ -59,6 +59,7 @@ namespace PersonalWiki.View
                 using (DataProvider dp = new DataProvider())
                     dp.addRevision(id, text.Text);
             date.Text = DateTime.Now.ToString("HH:mm dd.MM.yyyy");
+            unsaved.Visibility = Visibility.Hidden;
             _titleChanged = false;
             _textChanged = false;
         }
@@ -69,6 +70,7 @@ namespace PersonalWiki.View
             if (_gotFocus && !_titleChanged && !string.IsNullOrWhiteSpace(title.Text))
             {
                 _titleChanged = true;
+                unsaved.Visibility = Visibility.Visible;
                 timer.Start();
             }
         }
@@ -81,6 +83,7 @@ namespace PersonalWiki.View
             if (_gotFocus && !_textChanged)
             {
                 _textChanged = true;
+                unsaved.Visibility = Visibility.Visible;
                 timer.Start();
             }
         }
@@ -98,6 +101,7 @@ namespace PersonalWiki.View
         {
             View.FindReplaceDialog dlg = (View.FindReplaceDialog)sender;
             text.Select(dlg.Index, dlg.Lenght);
+            text.Focus();
         }
 
         private void onReplaced(object sender, EventArgs e)
@@ -124,7 +128,7 @@ namespace PersonalWiki.View
         {
             View.FindReplaceDialog dlg = new View.FindReplaceDialog(text);
             dlg.Found += new FoundEventHandler(onFound);
-            dlg.Replaced += new FoundEventHandler(onReplaced);
+            dlg.Replaced += new ReplacedEventHandler(onReplaced);
             dlg.Show();
             if (dlg.DialogResult == true)
                 text = dlg.Text;
