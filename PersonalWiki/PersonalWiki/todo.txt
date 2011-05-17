@@ -30,15 +30,11 @@ command binding can execute
 
 
 PageTab
- onclose event tallennus
  export
   pdf
   xps
   txt
  print
- revisionDialog
-  datagrid versioista
-  mahdollisuus palata vanhaan versioon
   
 mainWindow
  suljettavat välilehdet
@@ -48,4 +44,8 @@ mainWindow
  ribbon
   text
   undo redo
-  
+  sivujen ja projektien poisto
+done
+ FindReplaceDialog
+ AboutTab
+ RevisionDialog

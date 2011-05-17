@@ -52,16 +52,9 @@ namespace PersonalWiki.View
         private void Save(object sender, EventArgs e)
         {
             timer.Stop();
-            if (_titleChanged)
-                using (DataProvider dp = new DataProvider())
-                    dp.updateTitle(id, title.Text);
-            if (_textChanged)
-                using (DataProvider dp = new DataProvider())
-                    dp.addRevision(id, text.Text);
+            save();
             date.Text = DateTime.Now.ToString("HH:mm dd.MM.yyyy");
             unsaved.Visibility = Visibility.Hidden;
-            _titleChanged = false;
-            _textChanged = false;
         }
 
         //todo:validation
@@ -97,6 +90,9 @@ namespace PersonalWiki.View
             _gotFocus = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void onFound(object sender, EventArgs e)
         {
             View.FindReplaceDialog dlg = (View.FindReplaceDialog)sender;
@@ -104,6 +100,9 @@ namespace PersonalWiki.View
             text.Focus();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void onReplaced(object sender, EventArgs e)
         {
             View.FindReplaceDialog dlg = (View.FindReplaceDialog)sender;
@@ -130,8 +129,6 @@ namespace PersonalWiki.View
             dlg.Found += new FoundEventHandler(onFound);
             dlg.Replaced += new ReplacedEventHandler(onReplaced);
             dlg.Show();
-            if (dlg.DialogResult == true)
-                text = dlg.Text;
         }
 
         /// <summary>
@@ -149,9 +146,31 @@ namespace PersonalWiki.View
         private void ShowRevisionsCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             using (DataProvider dp = new DataProvider())
-                if (dp.GetRevisions(id).Count != 0)
+                if (dp.GetRevisions(id).Count > 1)
                     e.CanExecute = true;
         }
         #endregion
+
+        private void save()
+        {
+            if (_titleChanged)
+                using (DataProvider dp = new DataProvider())
+                    dp.updateTitle(id, title.Text);
+            if (_textChanged)
+                using (DataProvider dp = new DataProvider())
+                    dp.addRevision(id, text.Text);
+            _titleChanged = false;
+            _textChanged = false;
+        }
+
+        public void Closing()
+        {
+            save();
+        }
+
+        private void printExecuted(object sender, RoutedEventArgs e)
+        {
+            new Controller.ExportXps(title.Text, text.Text);
+        }
     }
 }

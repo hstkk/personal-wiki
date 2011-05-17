@@ -48,15 +48,14 @@ namespace PersonalWiki
         private void ShowPageTab(object sender, ExecutedRoutedEventArgs e)
         {
             int id;
-            int.TryParse(e.Parameter.ToString(), out id);
-            e.Parameter.ToString();
-            string header;
-            using (DataProvider dp = new DataProvider())
+            if (int.TryParse(e.Parameter.ToString(), out id))
             {
-                header = dp.GetPageTabHeader(7);
+                string header;
+                using (DataProvider dp = new DataProvider())
+                    header = dp.GetPageTabHeader(id);
+                if (!string.IsNullOrWhiteSpace(header) && !TabIsOpen(header))
+                    this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = header, Content = new View.PageTab(id) });
             }
-            if (!string.IsNullOrWhiteSpace(header) && !TabIsOpen(header))
-                this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = /*header*/id, Content = new View.PageTab(id)});
         }
 
         /// <summary>
@@ -87,8 +86,12 @@ namespace PersonalWiki
         {
             TabItem tabItem = e.Source as TabItem;
             if (tabItem != null)
+            {
+                if (tabItem.Header.ToString() != "About")
+                    ((View.PageTab)tabItem.Content).Closing();
                 //todo:error
                 this.tabControl.Items.Remove(tabItem);
+            }
         }
 
         /// <summary>
@@ -127,6 +130,16 @@ namespace PersonalWiki
         {
             using (DataProvider dp = new DataProvider())
                 e.CanExecute=dp.ProjectExists();
+        }
+
+        /// <summary>
+        /// Quick n dirty autosave on closing
+        /// </summary>
+        private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (TabItem t in tabControl.Items)
+                if (t.Header.ToString() != "About")
+                    ((View.PageTab)t.Content).Closing();
         }
     }
 }

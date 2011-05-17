@@ -6,7 +6,8 @@
         Title="Personal wiki"
 		x:Name="RibbonWindow"
 		Width="640" Height="480"
-        Icon="tango-accessories-text-editor.ico">
+        Icon="tango-accessories-text-editor.ico"
+        Closing="MainWindowClosing">
     <Window.Resources>
         <ResourceDictionary Source="MainWindowResources.xaml"/>
     </Window.Resources>

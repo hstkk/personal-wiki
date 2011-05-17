@@ -5,17 +5,17 @@
     <Window.CommandBindings>
         <CommandBinding Command="Search"
                         Executed="SearchExecuted"
-                        CanExecute="SearchCanExecute"/>
+                        CanExecute="SearchCanExecute" />
         <CommandBinding Command="Replace"
                         Executed="ReplaceExecuted"
-                        CanExecute="ReplaceCanExecute"/>
+                        CanExecute="ReplaceCanExecute" />
         <CommandBinding Command="Close"
                         Executed="closeExecuted" />
     </Window.CommandBindings>
-    <StackPanel Margin="5" >
+    <StackPanel Margin="5">
         <TabControl>
             <TabItem Header="Find">
-                <StackPanel>
+                <StackPanel FocusManager.FocusedElement="{Binding ElementName=search}">
                     <Label Content="Find what:" />
                     <TextBox Name="search"
                              TextChanged="searchTextChanged" />
@@ -24,7 +24,8 @@
                     <WrapPanel>
                         <Button Content="Find next"
                                 Margin="0,5,5,5"
-                                Command="Search" />
+                                Command="Search"
+                                IsDefault="True" />
                         <Button Content="Close"
                                 Margin="5,5,0,5"
                                 Command="Close"
@@ -33,7 +34,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Replace">
-                <StackPanel>
+                <StackPanel FocusManager.FocusedElement="{Binding ElementName=find}">
                     <Label Content="Find what:" />
                     <TextBox Name="find" />
                     <Label Content="Replace with:" />
@@ -43,7 +44,8 @@
                     <WrapPanel>
                         <Button Content="Replace all"
                                 Margin="0,5,0,5"
-                                Command="Replace" />
+                                Command="Replace"
+                                IsDefault="True" />
                         <Button Content="Close"
                                 Margin="5,5,0,5"
                                 Command="Close"

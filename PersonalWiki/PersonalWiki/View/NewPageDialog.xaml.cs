@@ -22,13 +22,13 @@ namespace PersonalWiki.View
         {
             InitializeComponent();
             using (DataProvider dp = new DataProvider())
-            {
                 this.combobox.DataContext = dp.GetProjectsTree();
-            }
         }
 
         private void CreateNewPage(object sender, RoutedEventArgs e)
         {
+            using (DataProvider dp = new DataProvider())
+                dp.addPage("asd", 3);
             this.DialogResult = true;
         }
 

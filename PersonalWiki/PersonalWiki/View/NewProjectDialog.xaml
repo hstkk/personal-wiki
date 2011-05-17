@@ -21,11 +21,13 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <StackPanel Margin="5" >
+    <StackPanel Margin="5"
+                FocusManager.FocusedElement="{Binding ElementName=title}" >
         <TextBlock TextWrapping="Wrap"><Bold>New project</Bold></TextBlock>        
         <Separator/>
         <TextBlock>Title:</TextBlock>
-        <TextBox Name="title" MaxLength="100">
+        <TextBox Name="title"
+                 MaxLength="100">
             <TextBox.Text>
                 <Binding Path="title.text" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
