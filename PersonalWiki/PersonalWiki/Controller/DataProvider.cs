@@ -70,7 +70,6 @@ namespace PersonalWiki
                 where p.PageId == id
                 select new PageResult2
                 {
-                    Id = p.PageId,
                     Title = p.PageTitle,
                     Text = r.RevisionText,
                     Date = r.RevisionTimestamp/*,
@@ -80,29 +79,32 @@ namespace PersonalWiki
             if(page.Count().Equals(0))
                 page=
                     from p in db.Page
+                    where p.PageId == id
                     select new PageResult2
                     {
-                        Id = p.PageId,
-                        Title = p.PageTitle,
-                        /*_Archived = p.PageArchived.Value,
+                        Title = p.PageTitle/*,
+                        _Archived = p.PageArchived.Value,
                         _Trash = p.PageTrash.Value*/
                     };
 
             return new ObservableCollection<PageResult2>(page.Take(1));
         }
 
-        public ObservableCollection<PageResult2> GetRevisions(int id)
+        /// <summary>
+        /// 
+        /// </summary>
+        public ObservableCollection<Model.Revision> GetRevisions(int id)
         {
-            var page =
-                from r in db.Revision
+            var revision =
+                from  r in db.Revision
                 orderby r.RevisionTimestamp descending
                 where r.PageId == id
-                select new PageResult2
+                select new Model.Revision
                 {
-                    Text = r.RevisionText,
-                    Date = r.RevisionTimestamp
+                    Date = r.RevisionTimestamp,
+                    Text = r.RevisionText
                 };
-            return new ObservableCollection<PageResult2>(page.Take(1));
+            return new ObservableCollection<Model.Revision>(revision);
         }
 
         public string GetPageTabHeader(int id)
@@ -112,22 +114,24 @@ namespace PersonalWiki
                 join pr in db.Project
                 on p.ProjectId equals pr.ProjectId
                 where p.PageId == id
-                select new
+                select new PageResult
                 {
-                    Header = p.PageTitle+" – "+pr.ProjectTitle
-                }.Header;
-            return header.ToString();
+                    Title = p.PageTitle+" – "+pr.ProjectTitle
+                };
+            if (header.ToArray().Count() == 1 && header.ToArray()[0].Title != null)
+                return header.ToArray()[0].Title;
+            return string.Empty;
         }
 
         public bool updateTitle(int id, string title)
         {
-            var page =
-                from p in db.Page
-                where p.PageId == id
-                select p;
-            page.Single().PageTitle = title;
             try
             {
+                var page =
+                    from p in db.Page
+                    where p.PageId == id
+                    select p;
+                page.Single().PageTitle = title;
                 db.SubmitChanges();
             }
             catch (Exception e)
@@ -140,6 +144,7 @@ namespace PersonalWiki
 
         public bool addRevision(int id, string text)
         {
+            bool success = false;
             Revision r = new Revision
             {
                 PageId = id,
@@ -150,13 +155,13 @@ namespace PersonalWiki
             try
             {
                 db.SubmitChanges();
+                success = true;
             }
             catch (Exception e)
             {
                 //todo:error handling
             }
-            //todo:jos onnistuus
-            return false;
+            return success;
         }
 
         public bool addProject(string title)

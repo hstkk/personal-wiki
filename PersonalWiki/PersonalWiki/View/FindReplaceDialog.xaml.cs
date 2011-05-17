@@ -57,6 +57,17 @@ namespace PersonalWiki.View
         #endregion
 
         #region commands
+        /// <summary>
+        ///  If text on search box changes set old MatchCollection to null
+        /// </summary>
+        private void searchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            matches = null;
+        }
+
+        /// <summary>
+        /// Finds keyword from document and then calls event
+        /// </summary>
         private void SearchExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (matches == null)
@@ -88,7 +99,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// Search can be executed if keyword is not empty
         /// </summary>
         private void SearchCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -96,6 +107,9 @@ namespace PersonalWiki.View
                 e.CanExecute = true;
         }
 
+        /// <summary>
+        /// Replaces keywoard in document using regex, when replacing is executed calls event
+        /// </summary>
         private void ReplaceExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             try
@@ -110,7 +124,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// Replace can be executed if keywoard is not empty
         /// </summary>
         private void ReplaceCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -119,20 +133,12 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// When close button is pressed FindReplaceDialog is closed
         /// </summary>
         private void closeExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             this.Close();
         }
         #endregion
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void searchTextChanged(object sender, TextChangedEventArgs e)
-        {
-            matches = null;
-        }
     }
 }

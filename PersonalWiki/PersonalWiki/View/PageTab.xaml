@@ -10,7 +10,7 @@
         <CommandBinding Command="local:Commands.ShowRevisions" Executed="ShowRevisionsDialog" CanExecute="ShowRevisionsCanExecute" />
         <CommandBinding Command="Find" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
         <CommandBinding Command="Replace" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
-        <CommandBinding Command="Print" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
+        <CommandBinding Command="Print" Executed="printExecuted" CanExecute="textCanExecute" />
     </UserControl.CommandBindings>
     <DockPanel LastChildFill="True">
         <TextBox Name="title"
@@ -23,7 +23,6 @@
                  GotFocus="titleTextGotFocus" />
         <DockPanel DockPanel.Dock="Top">
             <TextBlock Name="date"
-                       FontStyle="Italic"
                        Foreground="Gray"
                        Text="{Binding Path=Date, StringFormat=HH:mm dd.MM.yyyy}" />
             <TextBlock Name="unsaved" 

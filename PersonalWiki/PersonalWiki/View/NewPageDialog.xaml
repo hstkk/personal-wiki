@@ -6,7 +6,8 @@
         <CommandBinding Command="New" Executed="CreateNewPage" />
         <CommandBinding Command="Close" Executed="CancelNewPage" />
     </Window.CommandBindings>
-    <StackPanel Margin="5" >
+    <StackPanel Margin="5"
+                FocusManager.FocusedElement="{Binding ElementName=title}">
         <TextBlock TextWrapping="Wrap"><Bold>New page</Bold></TextBlock>
         <Separator/>
         <TextBlock>Title:</TextBlock>

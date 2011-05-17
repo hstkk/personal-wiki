@@ -54,9 +54,11 @@
     <ApplicationIcon>tango-accessories-text-editor.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -77,12 +79,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\Commands.cs" />
+    <Compile Include="Controller\ExportXps.cs" />
     <Compile Include="Database.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="Model\Copy of PageResult.cs" />
+    <Compile Include="Model\Revision.cs" />
     <Compile Include="rules\ProjectTitle.cs" />
     <Compile Include="View\AboutTab.xaml.cs">
       <DependentUpon>AboutTab.xaml</DependentUpon>
