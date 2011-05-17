@@ -28,5 +28,24 @@ todo
 - ui refresh
 command binding can execute
 
-wrap
-font
+
+PageTab
+ onclose event tallennus
+ export
+  pdf
+  xps
+  txt
+ print
+ revisionDialog
+  datagrid versioista
+  mahdollisuus palata vanhaan versioon
+  
+mainWindow
+ suljettavat välilehdet
+ open database
+ new database
+ import txt tiedosto
+ ribbon
+  text
+  undo redo
+  

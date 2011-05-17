@@ -26,6 +26,9 @@
                        FontStyle="Italic"
                        Foreground="Gray"
                        Text="{Binding Path=Date, StringFormat=HH:mm dd.MM.yyyy}" />
+            <TextBlock Name="unsaved" 
+                       Text="*"
+                       Visibility="Hidden" />
             <TextBlock TextAlignment="Right">
                 <Hyperlink Command="local:Commands.ShowRevisions">
                     Revisions
@@ -42,6 +45,6 @@
                  AllowDrop="True"
                  AcceptsReturn="True"
                  TextChanged="textChanged" 
-                 GotFocus="titleTextGotFocus"/>
+                 GotFocus="titleTextGotFocus" />
     </DockPanel>
 </UserControl>

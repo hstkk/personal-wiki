@@ -3,34 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Find and replace" Height="220" Width="300">
     <Window.CommandBindings>
-        <CommandBinding Command="Search" Executed="SearchExecuted" CanExecute="SearchCanExecute"/>
-        <CommandBinding Command="Search" Executed="ReplaceExecuted" CanExecute="ReplaceCanExecute"/>
-        <CommandBinding Command="Close" Executed="CloseDialog" />
+        <CommandBinding Command="Search"
+                        Executed="SearchExecuted"
+                        CanExecute="SearchCanExecute"/>
+        <CommandBinding Command="Replace"
+                        Executed="ReplaceExecuted"
+                        CanExecute="ReplaceCanExecute"/>
+        <CommandBinding Command="Close"
+                        Executed="closeExecuted" />
     </Window.CommandBindings>
     <StackPanel Margin="5" >
         <TabControl>
             <TabItem Header="Find">
                 <StackPanel>
                     <Label Content="Find what:" />
-                    <TextBox Name="search" />
-                    <CheckBox Content="Match case" Name="searchCase" />
+                    <TextBox Name="search"
+                             TextChanged="searchTextChanged" />
+                    <CheckBox Content="Match case"
+                              Name="searchCase" />
                     <WrapPanel>
-                        <Button Content="Find next" Margin="0,5,5,5" Command="Search" />
-                        <Button Content="Count" Margin="5" />
-                        <Button Content="Close" Margin="5,5,0,5" Command="Close" IsCancel="True"/>
+                        <Button Content="Find next"
+                                Margin="0,5,5,5"
+                                Command="Search" />
+                        <Button Content="Close"
+                                Margin="5,5,0,5"
+                                Command="Close"
+                                IsCancel="True" />
                     </WrapPanel>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Replace">
                 <StackPanel>
                     <Label Content="Find what:" />
-                    <TextBox Name="find"/>
+                    <TextBox Name="find" />
                     <Label Content="Replace with:" />
-                    <TextBox Name="replace"/>
-                    <CheckBox Content="Match case" Name="replaceCase"/>
+                    <TextBox Name="replace" />
+                    <CheckBox Content="Match case"
+                              Name="replaceCase" />
                     <WrapPanel>
-                        <Button Content="Replace all" Margin="0,5,0,5" Command="Replace" />
-                        <Button Content="Close" Margin="5,5,0,5" Command="Close" IsCancel="True"/>
+                        <Button Content="Replace all"
+                                Margin="0,5,0,5"
+                                Command="Replace" />
+                        <Button Content="Close"
+                                Margin="5,5,0,5"
+                                Command="Close"
+                                IsCancel="True" />
                     </WrapPanel>
                 </StackPanel>
             </TabItem>

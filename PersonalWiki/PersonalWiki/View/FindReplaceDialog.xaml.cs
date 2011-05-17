@@ -59,24 +59,32 @@ namespace PersonalWiki.View
         #region commands
         private void SearchExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (matches.Equals(null))
+            if (matches == null)
             {
-                if (searchCase.IsChecked.Equals(false))
+                if (!searchCase.IsChecked.Value)
                     matches = Regex.Matches(@Text.Text, @search.Text, RegexOptions.IgnoreCase);
                 else
                     matches = Regex.Matches(@Text.Text, @search.Text);
+                i = 0;
+                if (matches.Count == 0)
+                {
+                    matches = null;
+                    MessageBox.Show(this, "Not found!", "Warning!");
+                }
             }
-
-            if (Index.Equals(matches.Count))
-                Index = 0;
-
-            if (Found != null)
+            if (matches != null)
             {
-                Index = matches[i].Index;
-                Lenght = matches[i].Length;
-                onFound();
+                if (i == matches.Count)
+                    i = 0;
+
+                if (Found != null)
+                {
+                    Index = matches[i].Index;
+                    Lenght = matches[i].Length;
+                    onFound();
+                }
+                i++;
             }
-            i++;
         }
 
         /// <summary>
@@ -92,7 +100,7 @@ namespace PersonalWiki.View
         {
             try
             {
-                if (replaceCase.IsChecked.Equals(false))
+                if (!replaceCase.IsChecked.Value)
                     Text.Text = Regex.Replace(@Text.Text, @find.Text, @replace.Text, RegexOptions.IgnoreCase);
                 else
                     Text.Text = Regex.Replace(@Text.Text, @find.Text, @replace.Text);
@@ -106,10 +114,25 @@ namespace PersonalWiki.View
         /// </summary>
         private void ReplaceCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (find.Text.Length != 0 && replace.Text.Length != 0)
+            if (find.Text.Length != 0)
                 e.CanExecute = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void closeExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();
+        }
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void searchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            matches = null;
+        }
     }
 }
