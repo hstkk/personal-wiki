@@ -4,6 +4,7 @@
         Title="Revisions" Height="300" Width="300">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="closeExecuted" />
+        <CommandBinding Command="Find" Executed="findExecuted" CanExecute="findCanExecute"/>
     </Window.CommandBindings>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto">
@@ -20,7 +21,7 @@
                      TextChanged="searchTextChanged" />
             <Button Content="Find all"
                     Margin="0,5,0,5"
-                    Command="Replace"
+                    Command="Find"
                     IsDefault="True" />
             <DataGrid Name="dataGrid"
                   CanUserReorderColumns="True"
@@ -31,7 +32,7 @@
                   AlternatingRowBackground="Beige"
                   AlternationCount="2"
                   IsReadOnly="True"
-                  SelectionMode="Extended"
+                  SelectionMode="Single"
                   SelectionChanged="dataGridSelectionChanged" />
                 <Button Content="Close"
                         Margin="5,5,0,5"

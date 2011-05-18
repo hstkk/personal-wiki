@@ -20,8 +20,7 @@ namespace PersonalWiki
     public partial class FindDialog : Window
     {
         #region initialize
-        private int id;
-        public List<int> pages { get; set; }
+        public int Id { get; set; }
         public event FoundEventHandler Found;
         public FindDialog()
         {
@@ -44,14 +43,17 @@ namespace PersonalWiki
         /// </summary>
         private void searchTextChanged(object sender, TextChangedEventArgs e)
         {
-            pages = null;
+            Id = -1;
         }
 
         private void dataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach (PageResult2 p in dataGrid.SelectedItems)
-                pages.Add(p.Id);
-            onFound();
+            if (dataGrid.SelectedItem != null)
+            {
+                Id = ((PageResult2)dataGrid.SelectedItem).Id;
+                if (Id > 0)
+                    onFound();
+            }
         }
         #endregion
         #region commands
@@ -63,5 +65,17 @@ namespace PersonalWiki
             this.DialogResult = false;
         }
         #endregion
+
+        private void findExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            using (DataProvider dp = new DataProvider())
+                dataGrid.DataContext = dp.FindPage(search.Text);
+        }
+
+        private void findCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(search.Text))
+                e.CanExecute = true;
+        }
     }
 }
