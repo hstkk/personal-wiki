@@ -37,7 +37,7 @@ namespace PersonalWiki
         /// </summary>
         private void ShowAboutTab(object sender, RoutedEventArgs e)
         {
-            if (!TabIsOpen(-1))
+            if (!TabIsOpen(-1, true))
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "About", Content = new View.AboutTab() });
         }
 
@@ -45,12 +45,12 @@ namespace PersonalWiki
         {
             int id;
             if (int.TryParse(e.Parameter.ToString(), out id))
-                addPageTab(id);
+                addPageTab(id,true);
         }
 
-        private void addPageTab(int id)
+        private void addPageTab(int id, bool showMessageBox)
         {
-            if (!TabIsOpen(id))
+            if (!TabIsOpen(id, showMessageBox))
             {
                 string header;
                 using (DataProvider dp = new DataProvider())
@@ -122,7 +122,7 @@ namespace PersonalWiki
         /// </summary>
         /// <param name="id">Pages id, about tabs id = -1</param>
         /// <returns>false if tab is already open, else true</returns>
-        private bool TabIsOpen(int id)
+        private bool TabIsOpen(int id, bool showMessageBox)
         {
             bool open = true;
             int count = -1;
@@ -145,8 +145,8 @@ namespace PersonalWiki
                 }
                 if (count < 1 )
                     open = false;
-/*                else
-                    MessageBox.Show(this,"Tab is already open!", "Warning!");*/
+                else if (showMessageBox)
+                    MessageBox.Show(this,"Tab is already open!", "Warning!");
             }
             catch (Exception e){ }
             return open;
@@ -264,8 +264,7 @@ namespace PersonalWiki
         private void onFound(object sender, EventArgs e)
         {
             FindDialog dlg = (FindDialog)sender;
-            foreach (int page in dlg.pages)
-                addPageTab(page);
+            addPageTab(dlg.Id,false);
         }
 
         private void findExecuted(object sender, ExecutedRoutedEventArgs e)

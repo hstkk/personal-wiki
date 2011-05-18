@@ -79,9 +79,7 @@ namespace PersonalWiki
                     where p.PageId == id
                     select new PageResult2
                     {
-                        Title = p.PageTitle/*,
-                        _Archived = p.PageArchived.Value,
-                        _Trash = p.PageTrash.Value*/
+                        Title = p.PageTitle
                     };
 
             return new ObservableCollection<PageResult2>(page.Take(1));
@@ -184,6 +182,25 @@ namespace PersonalWiki
                 MessageBox.Show("Error can't add new project", "Error");
             }
             return success;
+        }
+
+        public ObservableCollection<PageResult2> FindPage(string keyword)
+        {
+            var page =
+                from p in db.Page
+                join r in db.Revision
+                on p.PageId equals r.PageId
+                orderby r.RevisionTimestamp descending
+                where r.RevisionText.Contains(keyword) ||
+                p.PageTitle.Contains(keyword)
+                select new PageResult2
+                {
+                    Id = p.PageId,
+                    Title = p.PageTitle,
+                    Text = r.RevisionText,
+                    Date = r.RevisionTimestamp
+                };
+            return new ObservableCollection<PageResult2>(page);
         }
 
         /// <summary>
