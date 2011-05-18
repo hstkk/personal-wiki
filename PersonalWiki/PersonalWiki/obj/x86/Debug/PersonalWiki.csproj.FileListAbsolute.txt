@@ -169,3 +169,7 @@ C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceme
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceoledb35.dll
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceqp35.dll
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlcese35.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\ImportPageDialog.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\ImportPageDialog.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindDialog.baml
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindDialog.g.cs

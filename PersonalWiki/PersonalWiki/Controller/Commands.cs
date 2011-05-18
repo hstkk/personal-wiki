@@ -78,5 +78,16 @@ namespace PersonalWiki
                 return deleteProject;
             }
         }
+
+        private static RoutedUICommand importPage;
+        public static ICommand ImportPage
+        {
+            get
+            {
+                if (importPage == null)
+                    importPage = new RoutedUICommand("Import page", "ImportPage", typeof(Commands));
+                return importPage;
+            }
+        }
     }
 }

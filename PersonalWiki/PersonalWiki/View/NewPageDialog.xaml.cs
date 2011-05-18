@@ -50,7 +50,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// New page can be greated if title != null
+        /// New page can be created if title != null
         /// </summary>
         private void createNewPageCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

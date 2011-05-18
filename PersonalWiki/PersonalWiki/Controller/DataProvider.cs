@@ -156,7 +156,7 @@ namespace PersonalWiki
             }
             catch (Exception e)
             {
-                //todo:error handling
+                MessageBox.Show("Error can't add new revision", "Error");
             }
             return success;
         }
@@ -213,6 +213,41 @@ namespace PersonalWiki
             return success;
         }
 
+        /// <summary>
+        /// Imports new page to database
+        /// </summary>
+        /// <param name="title">Pages name</param>
+        /// <param name="projectId">Projects id</param>
+        /// <param name="text">Revision text</param>
+        /// <returns>true if added succesfully</returns>
+        public bool importPage(string title, int projectId, string text)
+        {
+            bool success = false;
+            try
+            {
+                Page p = new Page
+                {
+                    PageTitle = title,
+                    ProjectId = projectId
+                };
+                db.Page.InsertOnSubmit(p);
+                db.SubmitChanges();
+                var page =
+                    from pa in db.Page
+                    where pa.ProjectId == projectId &&
+                    pa.PageTitle == title
+                    orderby pa.PageId descending
+                    select pa;
+                if(addRevision(page.Single().PageId, text))
+                    success = true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error can't import new page", "Error");
+            }
+            return success;
+        }
+
         private ObservableCollection<PageResult> GetProjects()
         {
             var projects =
@@ -245,6 +280,17 @@ namespace PersonalWiki
                 where p.ProjectTitle.Equals(projectTitle)
                 select p;
             if (projects.Count().Equals(0))
+                exist = false;
+            return exist;
+        }
+
+        public bool RevisionsExists()
+        {
+            bool exist = true;
+            var revisions =
+                from r in db.Revision
+                select r;
+            if (revisions.Count().Equals(0))
                 exist = false;
             return exist;
         }

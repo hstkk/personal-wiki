@@ -23,10 +23,8 @@ PageTab
 mainWindow
  open database
  new database
- import txt tiedosto
  ribbon
   text
-  save intervall
   spell check
 
 DONE
@@ -36,14 +34,4 @@ AboutTab
 RevisionDialog
 NewProjectDialog
 NewPageDialog
- 
-System Requirements
-Minimum:
-.NET Framework 4.0 or newer
-SQL Server Compact 3.5 or newer
-Processor: 128-bit octocore or better
-Memory: 16 GB
-Hard Drive: 1 TB
-Recommended:
-Processor: 128-bit sixteen-core or better
-Memory: 32 GB
+ImportPageDialog
