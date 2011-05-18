@@ -13,12 +13,12 @@ namespace PersonalWiki.Controller
     {
         private string title, text;
 
-        public void ExportXps(string title, string text){
+        public ExportXps(string title, string text){
             this.title=title;
             this.text=text;
         }
 
-        private void createXps()
+        public void createXps()
         {
             var dlg = new SaveFileDialog
             {

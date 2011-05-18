@@ -25,17 +25,22 @@ namespace PersonalWiki.View
     public partial class PageTab : UserControl
     {
         #region initialize
-        private int id;
+        public int Id { get; set; }
+        public int ProjectId {
+            get{
+                using (DataProvider dp = new DataProvider())
+                    return dp.GetProjectId(Id);
+            } 
+        }
         private bool _textChanged, _titleChanged, _gotFocus;
         private DispatcherTimer timer;
 
-        //todo:suljettaessa tarkista onko tallennettu, 
         public PageTab(int id)
         {
             InitializeComponent();
-            this.id = id;
+            this.Id = id;
             using (DataProvider dp = new DataProvider())
-                this.DataContext = dp.GetPage(id);
+                this.DataContext = dp.GetPage(Id);
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(30);
             timer.Tick += new EventHandler(Save);
@@ -113,11 +118,11 @@ namespace PersonalWiki.View
         #region commands
         private void ShowRevisionsDialog(object sender, RoutedEventArgs e)
         {
-            View.RevisionDialog dlg = new View.RevisionDialog(id);
+            View.RevisionDialog dlg = new View.RevisionDialog(Id);
             dlg.ShowDialog();
             if (dlg.DialogResult == true)
                 using (DataProvider dp = new DataProvider())
-                    this.DataContext = dp.GetPage(id);
+                    this.DataContext = dp.GetPage(Id);
         }
 
         /// <summary>
@@ -146,19 +151,19 @@ namespace PersonalWiki.View
         private void ShowRevisionsCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             using (DataProvider dp = new DataProvider())
-                if (dp.GetRevisions(id).Count > 1)
+                if (dp.GetRevisions(Id).Count > 1)
                     e.CanExecute = true;
         }
         #endregion
 
         private void save()
         {
-            if (_titleChanged)
+            if (_titleChanged && !string.IsNullOrWhiteSpace(title.Text))
                 using (DataProvider dp = new DataProvider())
-                    dp.updateTitle(id, title.Text);
+                    dp.updateTitle(Id, title.Text);
             if (_textChanged)
                 using (DataProvider dp = new DataProvider())
-                    dp.addRevision(id, text.Text);
+                    dp.addRevision(Id, text.Text);
             _titleChanged = false;
             _textChanged = false;
         }
@@ -170,7 +175,7 @@ namespace PersonalWiki.View
 
         private void printExecuted(object sender, RoutedEventArgs e)
         {
-            new Controller.ExportXps(title.Text, text.Text);
+            new Controller.ExportXps(title.Text, text.Text).createXps();
         }
     }
 }

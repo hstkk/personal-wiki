@@ -159,3 +159,13 @@ C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\Rev
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\RevisionDialog.g.cs
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindReplaceDialog.baml
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindReplaceDialog.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\PersonalWiki.exe.config
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\PersonalWiki_Content.g.cs
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceca35.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlcecompact35.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceer35EN.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceme35.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceoledb35.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlceqp35.dll
+C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\bin\Debug\dlls\sqlcese35.dll

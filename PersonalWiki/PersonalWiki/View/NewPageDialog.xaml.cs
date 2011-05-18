@@ -25,11 +25,20 @@ namespace PersonalWiki.View
                 this.combobox.DataContext = dp.GetProjectsTree();
         }
 
+        #region commands
+        /// <summary>
+        /// Adds new page to database
+        /// </summary>
         private void CreateNewPage(object sender, RoutedEventArgs e)
         {
-            using (DataProvider dp = new DataProvider())
-                dp.addPage("asd", 3);
-            this.DialogResult = true;
+            int id;
+            if (int.TryParse(combobox.SelectedValue.ToString(), out id)){
+                using (DataProvider dp = new DataProvider())
+                    if (dp.addPage(title.Text, id))
+                        this.DialogResult = true;
+                    else
+                        this.DialogResult = false;
+            }
         }
 
         /// <summary>
@@ -39,5 +48,15 @@ namespace PersonalWiki.View
         {
             this.DialogResult = false;
         }
+
+        /// <summary>
+        /// New page can be greated if title != null
+        /// </summary>
+        private void createNewPageCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(title.Text))
+                e.CanExecute = true;
+        }
+        #endregion
     }
 }

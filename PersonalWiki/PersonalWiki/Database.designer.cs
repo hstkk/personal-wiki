@@ -99,10 +99,6 @@ namespace PersonalWiki
 		
 		private string _PageTitle;
 		
-		private System.Data.Linq.Binary _PageArchived;
-		
-		private System.Data.Linq.Binary _PageTrash;
-		
 		private int _ProjectId;
 		
 		private EntitySet<Revision> _Revision;
@@ -117,10 +113,6 @@ namespace PersonalWiki
     partial void OnPageIdChanged();
     partial void OnPageTitleChanging(string value);
     partial void OnPageTitleChanged();
-    partial void OnPageArchivedChanging(System.Data.Linq.Binary value);
-    partial void OnPageArchivedChanged();
-    partial void OnPageTrashChanging(System.Data.Linq.Binary value);
-    partial void OnPageTrashChanged();
     partial void OnProjectIdChanging(int value);
     partial void OnProjectIdChanged();
     #endregion
@@ -168,46 +160,6 @@ namespace PersonalWiki
 					this._PageTitle = value;
 					this.SendPropertyChanged("PageTitle");
 					this.OnPageTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PageArchived", DbType="Binary(1)")]
-		public System.Data.Linq.Binary PageArchived
-		{
-			get
-			{
-				return this._PageArchived;
-			}
-			set
-			{
-				if ((this._PageArchived != value))
-				{
-					this.OnPageArchivedChanging(value);
-					this.SendPropertyChanging();
-					this._PageArchived = value;
-					this.SendPropertyChanged("PageArchived");
-					this.OnPageArchivedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PageTrash", DbType="Binary(1)")]
-		public System.Data.Linq.Binary PageTrash
-		{
-			get
-			{
-				return this._PageTrash;
-			}
-			set
-			{
-				if ((this._PageTrash != value))
-				{
-					this.OnPageTrashChanging(value);
-					this.SendPropertyChanging();
-					this._PageTrash = value;
-					this.SendPropertyChanged("PageTrash");
-					this.OnPageTrashChanged();
 				}
 			}
 		}

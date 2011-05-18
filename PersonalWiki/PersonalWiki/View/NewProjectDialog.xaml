@@ -1,44 +1,21 @@
 ﻿<Window x:Class="PersonalWiki.View.NewProjectDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:rules="clr-namespace:PersonalWiki.rules"
         Title="New project" Height="135" Width="300">
     <Window.CommandBindings>
-        <CommandBinding Command="New" Executed="CreateNewPage" />
+        <CommandBinding Command="New" Executed="CreateNewPage" CanExecute="createCanExecute" />
         <CommandBinding Command="Close" Executed="CancelNewPage" />
     </Window.CommandBindings>
-    <Window.Resources>
-
-        <!--The Too tip for the textbox-->
-        <Style TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
-             Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-              Path=(Validation.Errors)[0].ErrorContent}"></Setter>
-                    <Setter Property="Background" Value="Red"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
     <StackPanel Margin="5"
                 FocusManager.FocusedElement="{Binding ElementName=title}" >
         <TextBlock TextWrapping="Wrap"><Bold>New project</Bold></TextBlock>        
-        <Separator/>
+        <Separator />
         <TextBlock>Title:</TextBlock>
         <TextBox Name="title"
-                 MaxLength="100">
-            <TextBox.Text>
-                <Binding Path="title.text" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <rules:ProjectTitle />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+                 MaxLength="100" />
         <WrapPanel Margin="0,5,0,0">
-            <Button Content="Create" Margin="0,0,5,0" Command="New"/>
-            <Button Content="Cancel" Margin="5,0,0,0" Command="Close" IsCancel="True"/>
+            <Button Content="Create" Margin="0,0,5,0" Command="New" />
+            <Button Content="Cancel" Margin="5,0,0,0" Command="Close" IsCancel="True" />
         </WrapPanel>
     </StackPanel>
 </Window>

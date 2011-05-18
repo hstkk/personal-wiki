@@ -23,9 +23,16 @@ namespace PersonalWiki.View
             InitializeComponent();
         }
 
+        #region commands
+        /// <summary>
+        /// Adds new project to database
+        /// </summary>
         private void CreateNewPage(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            using (DataProvider dp = new DataProvider())
+                if (dp.addProject(title.Text))
+                    this.DialogResult = true;
+                else this.DialogResult = false;
         }
 
         /// <summary>
@@ -35,5 +42,15 @@ namespace PersonalWiki.View
         {
             this.DialogResult = false;
         }
+
+        /// <summary>
+        /// CreateNewPage command can be executed if title != null
+        /// </summary>
+        private void createCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(title.Text))
+                e.CanExecute = true;
+        }
+        #endregion
     }
 }

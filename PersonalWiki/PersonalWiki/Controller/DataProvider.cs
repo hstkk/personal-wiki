@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 
 //using System.Data;
 
@@ -20,8 +21,6 @@ namespace PersonalWiki
         Database db = new Database(@"Data Source=C:\Users\Sami\Desktop\työnalla\Database.sdf");
 //        Database db = new Database();
 
-        //if project is archived||if project is trash
-        //todo:Error Getting Projects||Create new project
         /// <summary>
         /// 
         /// </summary>
@@ -46,7 +45,7 @@ namespace PersonalWiki
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private ObservableCollection<PageResult> GetPages(int id)
+        public ObservableCollection<PageResult> GetPages(int id)
         {
             var pages =
                 from p in db.Page
@@ -72,9 +71,7 @@ namespace PersonalWiki
                 {
                     Title = p.PageTitle,
                     Text = r.RevisionText,
-                    Date = r.RevisionTimestamp/*,
-                    _Archived = p.PageArchived.Value,
-                    _Trash = p.PageTrash.Value*/
+                    Date = r.RevisionTimestamp
                 };
             if(page.Count().Equals(0))
                 page=
@@ -164,8 +161,14 @@ namespace PersonalWiki
             return success;
         }
 
+        /// <summary>
+        /// Adds new project to database
+        /// </summary>
+        /// <param name="title">Projects name</param>
+        /// <returns>true if added succesfully</returns>
         public bool addProject(string title)
         {
+            bool success = false;
             Project p = new Project
             {
                 ProjectTitle = title
@@ -174,17 +177,24 @@ namespace PersonalWiki
             try
             {
                 db.SubmitChanges();
+                success = true;
             }
             catch (Exception e)
             {
-                //todo:error handling
+                MessageBox.Show("Error can't add new project", "Error");
             }
-            //todo:jos onnistuus
-            return false;
+            return success;
         }
 
+        /// <summary>
+        /// Adds new page to database
+        /// </summary>
+        /// <param name="title">Pages name</param>
+        /// <param name="projectId">Projects id</param>
+        /// <returns>true if added succesfully</returns>
         public bool addPage(string title, int projectId)
         {
+            bool success = false;
             Page p = new Page
             {
                 PageTitle = title,
@@ -194,13 +204,13 @@ namespace PersonalWiki
             try
             {
                 db.SubmitChanges();
+                success = true;
             }
             catch (Exception e)
             {
-                //todo:error handling
+                MessageBox.Show("Error can't add new page", "Error");
             }
-            //todo:jos onnistuus
-            return false;
+            return success;
         }
 
         private ObservableCollection<PageResult> GetProjects()
@@ -239,6 +249,81 @@ namespace PersonalWiki
             return exist;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool deletePage(int id)
+        {
+            bool success = false;
+            try
+            {
+                var revision =
+                  from r in db.Revision
+                    where r.PageId == id
+                    select r;
+                db.Revision.DeleteAllOnSubmit(revision);
+                var page =
+                    from p in db.Page
+                    where p.PageId == id
+                    select p;
+                db.Page.DeleteAllOnSubmit(page);
+                db.SubmitChanges();
+                success = true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error, can't delete page", "Error!");
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool deleteProject(int id)
+        {
+            bool success = false;
+            try
+            {
+                var pages =
+                from p in db.Page
+                    where p.ProjectId == id
+                    select p;
+                foreach (var page in pages)
+                    deletePage(page.PageId);
+                var project =
+                    from p in db.Project
+                    where p.ProjectId == id
+                    select p;
+                db.Project.DeleteAllOnSubmit(project);
+                db.SubmitChanges();
+                success = true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error, can't delete project", "Error!");
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int GetProjectId(int id)
+        {
+            int projectId = -1;
+            try
+            {
+                var page =
+                    from p in db.Page
+                    where p.PageId == id
+                    select p;
+                projectId = page.Single().ProjectId;
+            }
+            catch (Exception e) { }
+            return projectId;
+        }
+
         public bool PageExists(int projectId, string pageTitle)
         {
             bool exist = true;
@@ -255,11 +340,11 @@ namespace PersonalWiki
         //todo: create db, users removed from dbml
         public bool createDatabase()
         {
-            if (!File.Exists(DatabasePath.Path))
+/*            if (!File.Exists(DatabasePath.Path))
             {
                 db.CreateDatabase();
                 //todo:jos onnistuus
-            }
+            }*/
             return false;
         }
 

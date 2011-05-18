@@ -24,16 +24,10 @@ namespace PersonalWiki
         {
             InitializeComponent();
 
-            #region testPath
-            DatabasePath.Path = @"C:\Users\Sami\Desktop\työnalla\Database – empty.sdf";
-            #endregion
             //todo:check if sql server ce is installed
-            //todo:refresh treeView
             //todo:database and tabs from last time from ini file
-            using (DataProvider dp = new DataProvider())
-            {
-                this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
-            }
+            font.DataContext = Fonts.SystemFontFamilies;
+            refreshProjectsTreeview();
         }
 
         /// <summary>
@@ -41,19 +35,19 @@ namespace PersonalWiki
         /// </summary>
         private void ShowAboutTab(object sender, RoutedEventArgs e)
         {
-            if (!TabIsOpen("About"))
+            if (!TabIsOpen(-1))
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = "About", Content = new View.AboutTab() });
         }
 
         private void ShowPageTab(object sender, ExecutedRoutedEventArgs e)
         {
             int id;
-            if (int.TryParse(e.Parameter.ToString(), out id))
+            if (int.TryParse(e.Parameter.ToString(), out id) && !TabIsOpen(id))
             {
                 string header;
                 using (DataProvider dp = new DataProvider())
                     header = dp.GetPageTabHeader(id);
-                if (!string.IsNullOrWhiteSpace(header) && !TabIsOpen(header))
+                if (!string.IsNullOrWhiteSpace(header))
                     this.tabControl.SelectedIndex = this.tabControl.Items.Add(new TabItem { Header = header, Content = new View.PageTab(id) });
             }
         }
@@ -82,33 +76,59 @@ namespace PersonalWiki
                 refreshProjectsTreeview();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void CloseTab(object sender, RoutedEventArgs e)
         {
             TabItem tabItem = e.Source as TabItem;
             if (tabItem != null)
             {
-                if (tabItem.Header.ToString() != "About")
-                    ((View.PageTab)tabItem.Content).Closing();
-                //todo:error
-                this.tabControl.Items.Remove(tabItem);
+                try
+                {
+                    if (tabItem.Header.ToString() != "About")
+                        ((View.PageTab)tabItem.Content).Closing();
+                    tabControl.Items.Remove(tabItem);
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Error can't close tab", "Error!");
+                }
             }
         }
 
         /// <summary>
         /// Checks if tab is already open
         /// </summary>
-        /// <param name="name">Tab name</param>
+        /// <param name="id">Pages id, about tabs id = -1</param>
         /// <returns>false if tab is already open, else true</returns>
-        private bool TabIsOpen(string name)
+        private bool TabIsOpen(int id)
         {
             bool open = true;
-            var q = from TabItem t in tabControl.Items
-                    where t.Header.Equals(name)
-                    select t;
-            if (q.Count().Equals(0))
-                open = false;
-            else
-                MessageBox.Show(this,name+" is already open!","Warning!");
+            int count = -1;
+            try
+            {
+                if (id == -1)
+                {
+                    var q = from TabItem t in tabControl.Items
+                            where t.Header.Equals("About")
+                            select t;
+                    count = q.Count();
+                }
+                else
+                {
+                    var q = from TabItem t in tabControl.Items
+                            where ((View.PageTab)t.Content).Id == id
+                            select t;
+                    count = q.Count();
+                    
+                }
+                if (count < 1 )
+                    open = false;
+                else
+                    MessageBox.Show(this,"Tab is already open!", "Warning!");
+            }
+            catch (Exception e){ }
             return open;
         }
 
@@ -118,9 +138,7 @@ namespace PersonalWiki
         private void refreshProjectsTreeview()
         {
             using (DataProvider dp = new DataProvider())
-            {
-                this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
-            }
+               this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
         }
 
         /// <summary>
@@ -129,7 +147,7 @@ namespace PersonalWiki
         private void ShowNewPageDialogCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             using (DataProvider dp = new DataProvider())
-                e.CanExecute=dp.ProjectExists();
+                e.CanExecute = dp.ProjectExists();
         }
 
         /// <summary>
@@ -140,6 +158,87 @@ namespace PersonalWiki
             foreach (TabItem t in tabControl.Items)
                 if (t.Header.ToString() != "About")
                     ((View.PageTab)t.Content).Closing();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void DeletePageExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            int id;
+            if (MessageBox.Show("Do you want to remove this page?", "Remove", MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes && int.TryParse(e.Parameter.ToString(), out id))
+            {
+                ProjectsTreeView.IsEnabled = false;
+                ProjectsTreeView.Visibility = System.Windows.Visibility.Hidden;
+                try
+                {
+                    if (tabControl.Items.Count > 0)
+                    {
+                        var q = from TabItem t in tabControl.Items
+                                where t.Header.ToString() != "About" &&
+                                ((View.PageTab)t.Content).Id == id
+                                select t;
+                        tabControl.Items.Remove(q.Single());
+                    }
+                }
+                catch (Exception err) { }
+                using (DataProvider dp = new DataProvider())
+                    if (dp.deletePage(id))
+                        refreshProjectsTreeview();
+                ProjectsTreeView.IsEnabled = true;
+                ProjectsTreeView.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void DeleteProjectExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            int id;
+            if (MessageBox.Show("Do you want to remove this project?", "Remove", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes && int.TryParse(e.Parameter.ToString(), out id))
+            {
+                ProjectsTreeView.IsEnabled = false;
+                try
+                {
+                    if (tabControl.Items.Count > 0)
+                    {
+                        List<PageResult> pages;
+                        using (DataProvider dp = new DataProvider())
+                            pages = dp.GetPages(id).ToList<PageResult>();
+                        foreach (PageResult page in pages)
+                        {
+                            var q = from TabItem t in tabControl.Items
+                                    where t.Header.ToString() != "About" &&
+                                    ((View.PageTab)t.Content).Id == page.Id
+                                    select t;
+                            tabControl.Items.Remove(q.Single());
+                        }
+                    }
+                }
+                catch (Exception err) { }
+                using (DataProvider dp = new DataProvider())
+                    if (dp.deleteProject(id))
+                        refreshProjectsTreeview();
+                ProjectsTreeView.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void pageCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            int id;
+            if (int.TryParse(e.Parameter.ToString(), out id))
+                e.CanExecute = true;
+        }
+
+        private void sizeSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Properties.Settings.Default.FontSize = size.SelectedItem.ToString();
+            Properties.Settings.Default.Save();
+            MessageBox.Show(Properties.Settings.Default["FontSize"].ToString());
         }
     }
 }
