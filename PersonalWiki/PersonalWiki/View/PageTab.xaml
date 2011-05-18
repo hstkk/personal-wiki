@@ -12,8 +12,10 @@
         <CommandBinding Command="Replace" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
         <CommandBinding Command="Print" Executed="printExecuted" CanExecute="textCanExecute" />
     </UserControl.CommandBindings>
-    <DockPanel LastChildFill="True">
-        <TextBox Name="title"
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+        <DockPanel LastChildFill="True">
+            <TextBox Name="title"
                  MaxLength="100"
                  FontWeight="Bold"
                  Text="{Binding Path=Title}"
@@ -21,21 +23,21 @@
                  DockPanel.Dock="Top"
                  TextChanged="titleChanged"
                  GotFocus="titleTextGotFocus" />
-        <DockPanel DockPanel.Dock="Top">
-            <TextBlock Name="date"
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock Name="date"
                        Foreground="Gray"
                        Text="{Binding Path=Date, StringFormat=HH:mm dd.MM.yyyy}" />
-            <TextBlock Name="unsaved" 
+                <TextBlock Name="unsaved" 
                        Text="*"
                        Visibility="Hidden" />
-            <TextBlock TextAlignment="Right">
+                <TextBlock TextAlignment="Right">
                 <Hyperlink Command="local:Commands.ShowRevisions">
                     Revisions
                 </Hyperlink>
-            </TextBlock>
-        </DockPanel>
-        <!--<RichTextBox Name="text" AcceptsTab="True" />-->
-        <TextBox Name="text"
+                </TextBlock>
+            </DockPanel>
+            <!--<RichTextBox Name="text" AcceptsTab="True" />-->
+            <TextBox Name="text"
                  AcceptsTab="True"
                  Text="{Binding Path=Text}"
                  BorderBrush="{x:Null}"
@@ -45,5 +47,6 @@
                  AcceptsReturn="True"
                  TextChanged="textChanged" 
                  GotFocus="titleTextGotFocus" />
-    </DockPanel>
+        </DockPanel>
+    </ScrollViewer>
 </UserControl>

@@ -13,16 +13,18 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Help" Executed="ShowAboutTab" />
-        <CommandBinding Command="local:Commands.ShowPage" Executed="ShowPageTab" />
+        <CommandBinding Command="local:Commands.ShowPage" Executed="ShowPageTab" CanExecute="pageCanExecute" />
         <CommandBinding Command="local:Commands.NewPage" Executed="ShowNewPageDialog" CanExecute="ShowNewPageDialogCanExecute"/>
         <CommandBinding Command="local:Commands.NewProject" Executed="ShowNewProjectDialog" />
         <CommandBinding Command="local:Commands.CloseTab" Executed="CloseTab" />
+        <CommandBinding Command="Delete" Executed="DeletePageExecuted" CanExecute="pageCanExecute" />
+        <CommandBinding Command="local:Commands.DeleteProject" Executed="DeleteProjectExecuted" CanExecute="pageCanExecute" />
         <CommandBinding Command="Find" Executed="ShowAboutTab" />
     </Window.CommandBindings>
     <DockPanel>
         <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
             <ribbon:Ribbon.ApplicationMenu>
-                <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
+                <ribbon:RibbonApplicationMenu SmallImageSource="Images\16x16\accessories-text-editor.png">
                     <ribbon:RibbonApplicationMenuItem Header="New"
                                                       ImageSource="Images\32x32\document-new.png"
                                                       Command="New" />
@@ -90,10 +92,33 @@
                 <ribbon:RibbonGroup x:Name="Text"
                                     Header="Text">
                     <WrapPanel>
-                        <ribbon:RibbonComboBox />
-                        <ribbon:RibbonComboBox />
+                        <ComboBox Name="font"
+                                  ItemsSource="{Binding}" />
+                        <ComboBox Name="size"
+                                  SelectionChanged="sizeSelectionChanged"
+                                  SelectedValue="{Binding Path=Properties.Settings.Default.FontSize}"
+                                  SelectedItem="{Binding Path=Properties.Settings.Default.FontSize}"
+                                  >
+                            <ComboBoxItem Content="8"/>
+                            <ComboBoxItem Content="9"/>
+                            <ComboBoxItem Content="9" />
+                            <ComboBoxItem Content="10" />
+                            <ComboBoxItem Content="11" />
+                            <ComboBoxItem Content="12" />
+                            <ComboBoxItem Content="14" />
+                            <ComboBoxItem Content="16" />
+                            <ComboBoxItem Content="18" />
+                            <ComboBoxItem Content="20" />
+                            <ComboBoxItem Content="22" />
+                            <ComboBoxItem Content="24" />
+                            <ComboBoxItem Content="26" />
+                            <ComboBoxItem Content="28" />
+                            <ComboBoxItem Content="36" />
+                            <ComboBoxItem Content="48" />
+                            <ComboBoxItem Content="72" />
+                        </ComboBox>
                     </WrapPanel>
-                    <ribbon:RibbonCheckBox Label="Wrap"/>
+                    <ribbon:RibbonCheckBox Label="Wrap" />
                     <!--<ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-bold.png"/>
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-italic.png"/>
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-underline.png"/>
@@ -110,75 +135,62 @@
                                          Label="Select all"
                                          Command="SelectAll" />
                 </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="Spellcheck" Header="Spellcheck">
+                    <ribbon:RibbonCheckBox Label="Enabled"/>
+                    <ComboBox>
+                        <ComboBoxItem Selector.IsSelected="True">en-US</ComboBoxItem>
+                        <ComboBoxItem>fr-FR</ComboBoxItem>
+                        <ComboBoxItem>es-ES</ComboBoxItem>
+                        <ComboBoxItem>de-DE</ComboBoxItem>
+                    </ComboBox>
+                </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <TabControl Margin="5,5,0,5" TabStripPlacement="Bottom">
-            <TabItem Header="Projects">
-                <TabItem.Content>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <TreeView ItemsSource="{Binding}"
-                                  Name="ProjectsTreeView"
-                                  Padding="0,0,9,0"
-                                  BorderBrush="{x:Null}"
-                                  DockPanel.Dock="Left"
-                                  >
-                            <TreeView.Resources>
-                                <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
-                                    <TextBlock Text="{Binding Path=Title}" />
-                                </HierarchicalDataTemplate>
-                                <DataTemplate DataType="{x:Type local:PageResult}">
-                                    <TextBlock>
-                                        <Hyperlink Command="local:Commands.ShowPage" CommandParameter="{Binding Path=Id}">
-                                            <TextBlock Text="{Binding Path=Title}"/>
-                                        </Hyperlink>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </TreeView.Resources>
-                        </TreeView>
-                    </ScrollViewer>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="Archive">
-                <TabItem.Content>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <TreeView ItemsSource="{Binding}" Name="ArchiveTreeView" Padding="0,0,9,0" BorderBrush="{x:Null}" DockPanel.Dock="Left">
-                            <TreeView.Resources>
-                                <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
-                                    <TextBlock Text="{Binding Path=Title}" />
-                                </HierarchicalDataTemplate>
-                                <DataTemplate DataType="{x:Type local:PageResult}">
-                                    <TextBlock Text="{Binding Path=Title}">
-                                        <Hyperlink>
-                                            <TextBlock Text="{Binding Path=Title}"/>
-                                        </Hyperlink>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </TreeView.Resources>
-                        </TreeView>
-                    </ScrollViewer>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="Trash">
-                <TabItem.Content>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <TreeView ItemsSource="{Binding}" Name="TrashTreeView" Padding="0,0,9,0" BorderBrush="{x:Null}" DockPanel.Dock="Left">
-                            <TreeView.Resources>
-                                <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
-                                    <TextBlock Text="{Binding Path=Title}" />
-                                </HierarchicalDataTemplate>
-                                <DataTemplate DataType="{x:Type local:PageResult}">
-                                    <TextBlock Text="{Binding Path=Title}">
-                                        <Hyperlink>
-                                            <TextBlock Text="{Binding Path=Title}"/>
-                                        </Hyperlink>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </TreeView.Resources>
-                        </TreeView>
-                    </ScrollViewer>
-                </TabItem.Content>
-            </TabItem>
-        </TabControl>
-        <TabControl Name="tabControl" Margin="5" DockPanel.Dock="Right" />
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <TreeView ItemsSource="{Binding}"
+                          Name="ProjectsTreeView"
+                          Padding="0,0,9,0"
+                          BorderBrush="{x:Null}"
+                          Grid.Column="0">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type local:ProjectResult}" ItemsSource="{Binding Pages}">
+                            <TextBlock Text="{Binding Path=Title}">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu StaysOpen="true">
+                                        <MenuItem Header="Remove project" Command="local:Commands.DeleteProject" CommandParameter="{Binding Path=Id}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type local:PageResult}">
+                            <TextBlock>
+                                <Hyperlink Command="local:Commands.ShowPage" CommandParameter="{Binding Path=Id}">
+                                    <TextBlock Text="{Binding Path=Title}"/>
+                                    <Hyperlink.ContextMenu>
+                                        <ContextMenu StaysOpen="true">
+                                            <MenuItem Header="Remove page" Command="Delete" CommandParameter="{Binding Path=Id}" />
+                                        </ContextMenu>
+                                    </Hyperlink.ContextMenu>
+                                </Hyperlink>
+                            </TextBlock>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </ScrollViewer>
+            <GridSplitter Width="1" 
+                          Background="LightBlue" />
+            <TabControl Name="tabControl"
+                        Margin="5"
+                        ItemContainerStyle="{DynamicResource CloseTabItem}"
+                        Grid.Column="2">
+            </TabControl>
+        </Grid>
     </DockPanel>
 </ribbon:RibbonWindow>

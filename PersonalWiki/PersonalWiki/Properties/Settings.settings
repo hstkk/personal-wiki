@@ -1,7 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PersonalWiki.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Font" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Arial</Value>
+    </Setting>
+    <Setting Name="SpellCheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SpellCheckLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en-US</Value>
+    </Setting>
+    <Setting Name="TextWrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FontSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">11</Value>
+    </Setting>
+    <Setting Name="DatabasePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Database.sdf</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

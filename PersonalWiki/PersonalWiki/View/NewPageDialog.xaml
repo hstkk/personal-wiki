@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="New page" Height="173" Width="300">
     <Window.CommandBindings>
-        <CommandBinding Command="New" Executed="CreateNewPage" />
+        <CommandBinding Command="New" Executed="CreateNewPage" CanExecute="createNewPageCanExecute" />
         <CommandBinding Command="Close" Executed="CancelNewPage" />
     </Window.CommandBindings>
     <StackPanel Margin="5"
@@ -19,8 +19,8 @@
                   SelectedValuePath="Id"
                   SelectedValue="{Binding Id}" />
         <WrapPanel Margin="0,5,0,0">
-            <Button Content="Create" Margin="0,0,5,0" Command="New"/>
-            <Button Content="Cancel" Margin="5,0,0,0" Command="Close" IsCancel="True"/>
+            <Button Content="Create" Margin="0,0,5,0" Command="New" />
+            <Button Content="Cancel" Margin="5,0,0,0" Command="Close" IsCancel="True" />
         </WrapPanel>
     </StackPanel>
 </Window>

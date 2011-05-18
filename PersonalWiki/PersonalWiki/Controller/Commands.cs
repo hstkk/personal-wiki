@@ -67,5 +67,16 @@ namespace PersonalWiki
                 return showRevisions;
             }
         }
+
+        private static RoutedUICommand deleteProject;
+        public static ICommand DeleteProject
+        {
+            get
+            {
+                if (deleteProject == null)
+                    deleteProject = new RoutedUICommand("Delete project", "DeleteProject", typeof(Commands));
+                return deleteProject;
+            }
+        }
     }
 }

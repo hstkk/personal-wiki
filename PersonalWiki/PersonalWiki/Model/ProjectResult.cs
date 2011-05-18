@@ -8,7 +8,6 @@ namespace PersonalWiki
 {
     public class ProjectResult : PageResult
     {
-        //todo:Laziness
         /// <summary>
         /// 
         /// </summary>

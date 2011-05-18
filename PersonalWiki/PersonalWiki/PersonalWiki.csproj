@@ -58,6 +58,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,7 +90,7 @@
     </Compile>
     <Compile Include="Model\Copy of PageResult.cs" />
     <Compile Include="Model\Revision.cs" />
-    <Compile Include="rules\ProjectTitle.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="View\AboutTab.xaml.cs">
       <DependentUpon>AboutTab.xaml</DependentUpon>
     </Compile>
@@ -117,7 +120,6 @@
     <Compile Include="Controller\DataProvider.cs" />
     <Compile Include="Model\PageResult.cs" />
     <Compile Include="Model\ProjectResult.cs" />
-    <Compile Include="Model\DatabasePath.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -165,8 +167,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Diagrams\ClassDiagram1.cd" />
-    <None Include="Diagrams\ClassDiagram2.cd" />
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Database.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Database.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>
@@ -174,20 +181,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Database.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Database.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\LargeIcon.png" />
-    <Resource Include="Images\SmallIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -290,6 +288,32 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Diagrams\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dlls\sqlceca35.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\sqlcecompact35.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\sqlceer35EN.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\sqlceme35.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\sqlceoledb35.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\sqlceqp35.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\sqlcese35.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,8 +4,6 @@
     <Type Name="Page">
       <Column Name="PageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PageTitle" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="PageArchived" Type="System.Data.Linq.Binary" DbType="Binary(1)" CanBeNull="true" />
-      <Column Name="PageTrash" Type="System.Data.Linq.Binary" DbType="Binary(1)" CanBeNull="true" />
       <Column Name="ProjectId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="PageId" Member="Revision" ThisKey="PageId" OtherKey="PageId" Type="Revision" DeleteRule="NO ACTION" />
       <Association Name="ProjectId" Member="Project" ThisKey="ProjectId" OtherKey="ProjectId" Type="Project" IsForeignKey="true" />

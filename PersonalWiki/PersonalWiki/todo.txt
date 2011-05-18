@@ -1,33 +1,17 @@
 todo
 ----
-- haku/filtteröinti
 - export
   - html
   - txt
 - spellcheck
 - Auto-Naming of Notes
   - Tired of inventing names? Let myNotes do it for you!
-* Live Word CountAnd it counts characters too.
 - tulostus
-- Minimization to system tray
-- jumptray
-- Search and replace
-- roskakori
-- arkisto
-- Full screen editing
-- View recently updated pages
 - Saved Workspaces
   - Quit with all your windows open. Relaunch, and there they are again. Great for picking up where you left off.
 - last file and note reopened automatically on start
-- Search with highlighting
-- Fast full-text search
-- Incremental in-page search
 - import txt files
 - Quickly insert timestamps
-- check the history
-- ui refresh
-command binding can execute
-
 
 PageTab
  export
@@ -37,15 +21,29 @@ PageTab
  print
   
 mainWindow
- suljettavat välilehdet
  open database
  new database
  import txt tiedosto
  ribbon
   text
-  undo redo
-  sivujen ja projektien poisto
-done
- FindReplaceDialog
- AboutTab
- RevisionDialog
+  save intervall
+  spell check
+
+DONE
+----
+FindReplaceDialog
+AboutTab
+RevisionDialog
+NewProjectDialog
+NewPageDialog
+ 
+System Requirements
+Minimum:
+.NET Framework 4.0 or newer
+SQL Server Compact 3.5 or newer
+Processor: 128-bit octocore or better
+Memory: 16 GB
+Hard Drive: 1 TB
+Recommended:
+Processor: 128-bit sixteen-core or better
+Memory: 32 GB
