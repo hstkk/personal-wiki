@@ -15,6 +15,8 @@ using Microsoft.Windows.Controls.Ribbon;
 
 namespace PersonalWiki
 {
+    public delegate void FoundEventHandler(object sender, EventArgs e);
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -42,7 +44,13 @@ namespace PersonalWiki
         private void ShowPageTab(object sender, ExecutedRoutedEventArgs e)
         {
             int id;
-            if (int.TryParse(e.Parameter.ToString(), out id) && !TabIsOpen(id))
+            if (int.TryParse(e.Parameter.ToString(), out id))
+                addPageTab(id);
+        }
+
+        private void addPageTab(int id)
+        {
+            if (!TabIsOpen(id))
             {
                 string header;
                 using (DataProvider dp = new DataProvider())
@@ -53,7 +61,7 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// Shows NewPageDialog, if dialog result is true calls refrefsProjectsTreeview method
+        /// Shows NewPageDialog, if dialog result is true calls refreshProjectsTreeview method
         /// </summary>
         private void ShowNewPageDialog(object sender, RoutedEventArgs e)
         {
@@ -65,11 +73,23 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// Shows NewProjectDialog, if dialog result is true calls refrefsProjectsTreeview method
+        /// Shows NewProjectDialog, if dialog result is true calls refreshProjectsTreeview method
         /// </summary>
         private void ShowNewProjectDialog(object sender, RoutedEventArgs e)
         {
             View.NewProjectDialog dlg = new View.NewProjectDialog();
+            dlg.Owner = this;
+            dlg.ShowDialog();
+            if (dlg.DialogResult == true)
+                refreshProjectsTreeview();
+        }
+
+        /// <summary>
+        /// Shows ImportPageDialog, if dialog result is true calls refreshProjectsTreeview method
+        /// </summary>
+        private void importExecuted(object sender, RoutedEventArgs e)
+        {
+            View.ImportPageDialog dlg = new View.ImportPageDialog();
             dlg.Owner = this;
             dlg.ShowDialog();
             if (dlg.DialogResult == true)
@@ -125,8 +145,8 @@ namespace PersonalWiki
                 }
                 if (count < 1 )
                     open = false;
-                else
-                    MessageBox.Show(this,"Tab is already open!", "Warning!");
+/*                else
+                    MessageBox.Show(this,"Tab is already open!", "Warning!");*/
             }
             catch (Exception e){ }
             return open;
@@ -239,6 +259,27 @@ namespace PersonalWiki
             Properties.Settings.Default.FontSize = size.SelectedItem.ToString();
             Properties.Settings.Default.Save();
             MessageBox.Show(Properties.Settings.Default["FontSize"].ToString());
+        }
+
+        private void onFound(object sender, EventArgs e)
+        {
+            FindDialog dlg = (FindDialog)sender;
+            foreach (int page in dlg.pages)
+                addPageTab(page);
+        }
+
+        private void findExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            FindDialog dlg = new FindDialog();
+            dlg.Found += new FoundEventHandler(onFound);
+            dlg.ShowDialog();
+        }
+
+        private void findCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            using (DataProvider dp = new DataProvider())
+                if (dp.RevisionsExists())
+                    e.CanExecute = true;
         }
     }
 }

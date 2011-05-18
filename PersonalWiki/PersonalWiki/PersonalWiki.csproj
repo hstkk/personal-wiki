@@ -94,6 +94,12 @@
     <Compile Include="View\AboutTab.xaml.cs">
       <DependentUpon>AboutTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FindDialog.xaml.cs">
+      <DependentUpon>FindDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImportPageDialog.xaml.cs">
+      <DependentUpon>ImportPageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
@@ -131,6 +137,14 @@
     <Page Include="View\AboutTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FindDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ImportPageDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\NewProjectDialog.xaml">
       <Generator>MSBuild:Compile</Generator>

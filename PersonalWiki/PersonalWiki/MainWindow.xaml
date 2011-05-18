@@ -19,7 +19,8 @@
         <CommandBinding Command="local:Commands.CloseTab" Executed="CloseTab" />
         <CommandBinding Command="Delete" Executed="DeletePageExecuted" CanExecute="pageCanExecute" />
         <CommandBinding Command="local:Commands.DeleteProject" Executed="DeleteProjectExecuted" CanExecute="pageCanExecute" />
-        <CommandBinding Command="Find" Executed="ShowAboutTab" />
+        <CommandBinding Command="Find" Executed="findExecuted" CanExecute="findCanExecute"/>
+        <CommandBinding Command="local:Commands.ImportPage" Executed="importExecuted" CanExecute="ShowNewPageDialogCanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
@@ -34,7 +35,7 @@
                     <ribbon:RibbonSeparator/>
                     <ribbon:RibbonApplicationMenuItem Header="Import"
                                                       ImageSource="Images\32x32\document-open.png"
-                                                      Command="Open" />
+                                                      Command="local:Commands.ImportPage" />
                     <ribbon:RibbonApplicationMenuItem Header="Export as..."
                                                       ImageSource="Images\32x32\document-save-as.png">
                         <ribbon:RibbonApplicationMenuItem Header="txt"
@@ -48,9 +49,6 @@
                                                       Command="Open" />
                     </ribbon:RibbonApplicationMenuItem>
                     <ribbon:RibbonSeparator/>
-                    <ribbon:RibbonApplicationMenuItem Header="Page settings"
-                                                      ImageSource="Images\32x32\document-properties.png"
-                                                      Command="Properties" />
                     <ribbon:RibbonApplicationMenuItem Header="Print"
                                                       ImageSource="Images\32x32\document-print.png"
                                                       Command="Print" />

@@ -9,7 +9,5 @@ namespace PersonalWiki
     {
         public DateTime Date { get; set; }
         public string Text { get; set; }
-/*        public byte _Archived { get; set; }
-        public byte _Trash { get;  set; }*/
     }
 }

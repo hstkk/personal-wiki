@@ -1,0 +1,32 @@
+﻿<Window x:Class="PersonalWiki.View.ImportPageDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="New page" Height="323" Width="300">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" Executed="importNewPage" CanExecute="importNewPageCanExecute" />
+        <CommandBinding Command="Close" Executed="CancelNewPage" />
+        <CommandBinding Command="Open" Executed="openExecuted" />
+    </Window.CommandBindings>
+    <StackPanel Margin="5"
+                FocusManager.FocusedElement="{Binding ElementName=title}">
+        <TextBlock TextWrapping="Wrap"><Bold>Import txt file</Bold></TextBlock>
+        <Separator/>
+        <TextBlock>File:</TextBlock>
+        <TextBlock Name="file"
+                   TextWrapping="Wrap" />
+        <Button Content="Select file"
+                Command="Open" />
+        <TextBlock>Title:</TextBlock>
+        <TextBox Name="title" MaxLength="100" />
+        <TextBlock>Project:</TextBlock>
+        <ComboBox Name="combobox"
+                  ItemsSource="{Binding}"
+                  DisplayMemberPath="Title"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding Id}" />
+        <WrapPanel Margin="0,5,0,0">
+            <Button Content="Import" Margin="0,0,5,0" Command="New" />
+            <Button Content="Cancel" Margin="5,0,0,0" Command="Close" IsCancel="True" />
+        </WrapPanel>
+    </StackPanel>
+</Window>

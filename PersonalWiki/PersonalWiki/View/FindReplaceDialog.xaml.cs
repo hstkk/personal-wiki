@@ -54,9 +54,7 @@ namespace PersonalWiki.View
             if (Replaced != null)
                 Replaced(this, EventArgs.Empty);
         }
-        #endregion
 
-        #region commands
         /// <summary>
         ///  If text on search box changes set old MatchCollection to null
         /// </summary>
@@ -64,7 +62,9 @@ namespace PersonalWiki.View
         {
             matches = null;
         }
+        #endregion
 
+        #region commands
         /// <summary>
         /// Finds keyword from document and then calls event
         /// </summary>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\App.xaml
-8-354671816
+10225303243
 71855179978
-21-1567060288
+231280578724
 18654228179
-MainWindow.xaml;MainWindowResources.xaml;View\AboutTab.xaml;View\NewProjectDialog.xaml;View\NewPageDialog.xaml;View\PageTab.xaml;View\RevisionDialog.xaml;View\FindReplaceDialog.xaml;
+MainWindow.xaml;MainWindowResources.xaml;View\AboutTab.xaml;View\FindDialog.xaml;View\ImportPageDialog.xaml;View\NewProjectDialog.xaml;View\NewPageDialog.xaml;View\PageTab.xaml;View\RevisionDialog.xaml;View\FindReplaceDialog.xaml;
 
 True
 
