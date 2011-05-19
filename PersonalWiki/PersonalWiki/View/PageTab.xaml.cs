@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Windows.Threading;
+using System.Drawing.Printing;
 
 namespace PersonalWiki.View
 {
@@ -174,7 +175,29 @@ namespace PersonalWiki.View
 
         private void printExecuted(object sender, RoutedEventArgs e)
         {
-            new Controller.ExportXps(title.Text, text.Text).createXps();
+            PrintDialog dlg = new PrintDialog();
+            dlg.PageRangeSelection = PageRangeSelection.AllPages;
+            dlg.UserPageRangeEnabled = true;
+            if(dlg.ShowDialog().Equals(true))
+            {
+                PrintDocument doc = new PrintDocument();
+                dlg.PrintVisual(text, "First Fit to Page WPF Print");
+//                dlg.PrintDocument(text.Text, title.Text);
+//                doc.pr
+//                doc.Print();
+                MessageBox.Show("ok");
+                /*
+                new PrintDocument();
+                XpsDocument xpsDocument = new XpsDocument("C:\\FixedDocumentSequence.xps", FileAccess.ReadWrite);
+                FixedDocumentSequence fixedDocSeq = xpsDocument.GetFixedDocumentSequence();
+                pDialog.PrintDocument(fixedDocSeq.DocumentPaginator, "Test print job");*/
+            }
+        }
+
+        private void exportTxtExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.ExportX txt = new Controller.ExportX(title.Text, text.Text);
+            txt.createTxt();
         }
     }
 }

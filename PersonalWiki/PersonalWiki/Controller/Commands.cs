@@ -89,5 +89,16 @@ namespace PersonalWiki
                 return importPage;
             }
         }
+
+        private static RoutedUICommand exportTxt;
+        public static ICommand ExportTxt
+        {
+            get
+            {
+                if (exportTxt == null)
+                    exportTxt = new RoutedUICommand("Export txt", "ExportTxt", typeof(Commands));
+                return exportTxt;
+            }
+        }
     }
 }
