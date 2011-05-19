@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Windows.Controls.Ribbon;
+using System.IO;
 
 namespace PersonalWiki
 {
@@ -22,14 +23,33 @@ namespace PersonalWiki
     /// </summary>
     public partial class MainWindow : RibbonWindow
     {
+        private bool canUseDatabase = false;
         public MainWindow()
         {
             InitializeComponent();
 
-            //todo:check if sql server ce is installed
-            //todo:database and tabs from last time from ini file
             font.DataContext = Fonts.SystemFontFamilies;
-            refreshProjectsTreeview();
+            font.SelectedValue = Properties.Settings.Default.Font;
+            size.DataContext = new int[] { 8, 9, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            size.SelectedItem = Properties.Settings.Default.FontSize;
+            /*language.DataContext = new string[] { "en-US", "fr-FR", "es-ES", "de-DE" };
+            language.SelectedValue = Properties.Settings.Default.SpellCheckLanguage;*/
+            if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.DatabasePath) && File.Exists(Properties.Settings.Default.DatabasePath))
+                canUseDatabase = true;
+            else
+                MessageBox.Show("Select database", "Notice");
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.Tabs))
+                {
+                    foreach (string sid in Properties.Settings.Default.Tabs.Trim().Split(' '))
+                    {
+                        int id;
+                        if (int.TryParse(sid, out id))
+                            addPageTab(id, false);
+                    }
+                    Properties.Settings.Default.Tabs = null;
+                    Properties.Settings.Default.Save();
+                }
+                refreshProjectsTreeview();
         }
 
         /// <summary>
@@ -50,7 +70,7 @@ namespace PersonalWiki
 
         private void addPageTab(int id, bool showMessageBox)
         {
-            if (!TabIsOpen(id, showMessageBox))
+            if (canUseDatabase && !TabIsOpen(id, showMessageBox))
             {
                 string header;
                 using (DataProvider dp = new DataProvider())
@@ -157,8 +177,9 @@ namespace PersonalWiki
         /// </summary>
         private void refreshProjectsTreeview()
         {
-            using (DataProvider dp = new DataProvider())
-               this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
+            if(canUseDatabase)
+                using (DataProvider dp = new DataProvider())
+                   this.ProjectsTreeView.DataContext = dp.GetProjectsTree();
         }
 
         /// <summary>
@@ -166,8 +187,9 @@ namespace PersonalWiki
         /// </summary>
         private void ShowNewPageDialogCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            using (DataProvider dp = new DataProvider())
-                e.CanExecute = dp.ProjectExists();
+            if (canUseDatabase)
+                using (DataProvider dp = new DataProvider())
+                    e.CanExecute = dp.ProjectExists();
         }
 
         /// <summary>
@@ -175,9 +197,20 @@ namespace PersonalWiki
         /// </summary>
         private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            foreach (TabItem t in tabControl.Items)
-                if (t.Header.ToString() != "About")
-                    ((View.PageTab)t.Content).Closing();
+            try
+            {
+                StringBuilder ids = new StringBuilder();
+                foreach (TabItem t in tabControl.Items)
+                    if (t.Header.ToString() != "About")
+                    {
+                        View.PageTab p = ((View.PageTab)t.Content);
+                        ids.Append(p.Id + " ");
+                        p.Closing();
+                    }
+                Properties.Settings.Default.Tabs = ids.ToString();
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception err) { }
         }
 
         /// <summary>
@@ -185,28 +218,31 @@ namespace PersonalWiki
         /// </summary>
         private void DeletePageExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            int id;
-            if (MessageBox.Show("Do you want to remove this page?", "Remove", MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes && int.TryParse(e.Parameter.ToString(), out id))
+            if (canUseDatabase)
             {
-                ProjectsTreeView.IsEnabled = false;
-                ProjectsTreeView.Visibility = System.Windows.Visibility.Hidden;
-                try
+                int id;
+                if (MessageBox.Show("Do you want to remove this page?", "Remove", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes && int.TryParse(e.Parameter.ToString(), out id))
                 {
-                    if (tabControl.Items.Count > 0)
+                    ProjectsTreeView.IsEnabled = false;
+                    ProjectsTreeView.Visibility = System.Windows.Visibility.Hidden;
+                    try
                     {
-                        var q = from TabItem t in tabControl.Items
-                                where t.Header.ToString() != "About" &&
-                                ((View.PageTab)t.Content).Id == id
-                                select t;
-                        tabControl.Items.Remove(q.Single());
+                        if (tabControl.Items.Count > 0)
+                        {
+                            var q = from TabItem t in tabControl.Items
+                                    where t.Header.ToString() != "About" &&
+                                    ((View.PageTab)t.Content).Id == id
+                                    select t;
+                            tabControl.Items.Remove(q.Single());
+                        }
                     }
+                    catch (Exception err) { }
+                    using (DataProvider dp = new DataProvider())
+                        if (dp.deletePage(id))
+                            refreshProjectsTreeview();
+                    ProjectsTreeView.IsEnabled = true;
+                    ProjectsTreeView.Visibility = System.Windows.Visibility.Visible;
                 }
-                catch (Exception err) { }
-                using (DataProvider dp = new DataProvider())
-                    if (dp.deletePage(id))
-                        refreshProjectsTreeview();
-                ProjectsTreeView.IsEnabled = true;
-                ProjectsTreeView.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -215,32 +251,35 @@ namespace PersonalWiki
         /// </summary>
         private void DeleteProjectExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            int id;
-            if (MessageBox.Show("Do you want to remove this project?", "Remove", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes && int.TryParse(e.Parameter.ToString(), out id))
+            if (canUseDatabase)
             {
-                ProjectsTreeView.IsEnabled = false;
-                try
+                int id;
+                if (MessageBox.Show("Do you want to remove this project?", "Remove", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes && int.TryParse(e.Parameter.ToString(), out id))
                 {
-                    if (tabControl.Items.Count > 0)
+                    ProjectsTreeView.IsEnabled = false;
+                    try
                     {
-                        List<PageResult> pages;
-                        using (DataProvider dp = new DataProvider())
-                            pages = dp.GetPages(id).ToList<PageResult>();
-                        foreach (PageResult page in pages)
+                        if (tabControl.Items.Count > 0)
                         {
-                            var q = from TabItem t in tabControl.Items
-                                    where t.Header.ToString() != "About" &&
-                                    ((View.PageTab)t.Content).Id == page.Id
-                                    select t;
-                            tabControl.Items.Remove(q.Single());
+                            List<PageResult> pages;
+                            using (DataProvider dp = new DataProvider())
+                                pages = dp.GetPages(id).ToList<PageResult>();
+                            foreach (PageResult page in pages)
+                            {
+                                var q = from TabItem t in tabControl.Items
+                                        where t.Header.ToString() != "About" &&
+                                        ((View.PageTab)t.Content).Id == page.Id
+                                        select t;
+                                tabControl.Items.Remove(q.Single());
+                            }
                         }
                     }
+                    catch (Exception err) { }
+                    using (DataProvider dp = new DataProvider())
+                        if (dp.deleteProject(id))
+                            refreshProjectsTreeview();
+                    ProjectsTreeView.IsEnabled = true;
                 }
-                catch (Exception err) { }
-                using (DataProvider dp = new DataProvider())
-                    if (dp.deleteProject(id))
-                        refreshProjectsTreeview();
-                ProjectsTreeView.IsEnabled = true;
             }
         }
 
@@ -256,9 +295,12 @@ namespace PersonalWiki
 
         private void sizeSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Properties.Settings.Default.FontSize = size.SelectedItem.ToString();
-            Properties.Settings.Default.Save();
-            MessageBox.Show(Properties.Settings.Default["FontSize"].ToString());
+            int fsize;
+            if (size.SelectedIndex != -1 && int.TryParse(size.SelectedItem.ToString(), out fsize))
+            {
+                Properties.Settings.Default.FontSize = fsize;
+                Properties.Settings.Default.Save();
+            }
         }
 
         private void onFound(object sender, EventArgs e)
@@ -276,9 +318,48 @@ namespace PersonalWiki
 
         private void findCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            using (DataProvider dp = new DataProvider())
-                if (dp.RevisionsExists())
-                    e.CanExecute = true;
+            if (canUseDatabase)
+            {
+                using (DataProvider dp = new DataProvider())
+                    if (dp.RevisionsExists())
+                        e.CanExecute = true;
+            }
+        }
+
+        private void wrapClicked(object sender, RoutedEventArgs e)
+        {
+            bool w = false;
+            if (wrap.IsChecked == true)
+                w = true;
+            Properties.Settings.Default.TextWrap = w;
+            Properties.Settings.Default.Save();
+        }
+
+        private void spellcheckClicked(object sender, RoutedEventArgs e)
+        {
+            bool s = false;
+            if (spellcheck.IsChecked == true)
+                s = true;
+            Properties.Settings.Default.SpellCheck = s;
+            Properties.Settings.Default.Save();
+        }
+
+        /*private void languageSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (language.SelectedIndex != -1)
+            {
+                Properties.Settings.Default.SpellCheckLanguage = language.SelectedItem.ToString();
+                Properties.Settings.Default.Save();
+            }
+        }*/
+
+        private void fontSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (font.SelectedIndex != -1)
+            {
+                Properties.Settings.Default.Font = font.SelectedItem.ToString();
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

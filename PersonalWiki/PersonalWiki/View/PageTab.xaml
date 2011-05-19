@@ -6,15 +6,23 @@
              xmlns:local="clr-namespace:PersonalWiki"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="settings" ObjectType="{x:Type local:Properties.Settings}" />
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource settings}, Path=Default.TextWrap}" Value="True">
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <UserControl.CommandBindings>
         <CommandBinding Command="local:Commands.ShowRevisions" Executed="ShowRevisionsDialog" CanExecute="ShowRevisionsCanExecute" />
         <CommandBinding Command="Find" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
         <CommandBinding Command="Replace" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
         <CommandBinding Command="Print" Executed="printExecuted" CanExecute="textCanExecute" />
     </UserControl.CommandBindings>
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Auto">
-        <DockPanel LastChildFill="True">
+    <DockPanel LastChildFill="True">
             <TextBox Name="title"
                  MaxLength="100"
                  FontWeight="Bold"
@@ -46,7 +54,11 @@
                  AllowDrop="True"
                  AcceptsReturn="True"
                  TextChanged="textChanged" 
-                 GotFocus="titleTextGotFocus" />
-        </DockPanel>
-    </ScrollViewer>
+                 GotFocus="titleTextGotFocus"
+                 FontFamily="{Binding Source={StaticResource settings}, Path=Default.Font}"
+                 FontSize="{Binding Source={StaticResource settings}, Path=Default.FontSize}"
+                 SpellCheck.IsEnabled="{Binding Source={StaticResource settings}, Path=Default.SpellCheck}"
+                 Language="en-US" />
+            <!--Language="{Binding Source={StaticResource settings}, Path=Default.SpellCheckLanguage}"-->
+    </DockPanel>
 </UserControl>

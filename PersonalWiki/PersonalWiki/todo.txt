@@ -19,14 +19,10 @@ PageTab
   xps
   txt
  print
-  
 mainWindow
  open database
  new database
- ribbon
-  text
-  spell check
-
+ timestamp
 DONE
 ----
 FindReplaceDialog

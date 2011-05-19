@@ -62,7 +62,6 @@ namespace PersonalWiki.View
             unsaved.Visibility = Visibility.Hidden;
         }
 
-        //todo:validation
         private void titleChanged(object sender, TextChangedEventArgs e)
         {
             if (_gotFocus && !_titleChanged && !string.IsNullOrWhiteSpace(title.Text))

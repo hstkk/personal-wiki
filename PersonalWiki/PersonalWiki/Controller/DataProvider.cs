@@ -13,33 +13,49 @@ namespace PersonalWiki
 {
     class DataProvider : IDisposable
     {
-/*        string strConn = string.Format("Data Source={0}", DatabasePath.Path);
-
-        IDbConnection conn = new System.Data.SqlServerCe.SqlCeConnection(strConStr);
-
-        Database db = new Database(conn);*/
-        Database db = new Database(@"Data Source=C:\Users\Sami\Desktop\työnalla\Database.sdf");
-//        Database db = new Database();
+        private Database db = null;
+        public DataProvider()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.DatabasePath) && File.Exists(Properties.Settings.Default.DatabasePath))
+                {
+                    string conn = string.Format("Data Source={0}", @Properties.Settings.Default.DatabasePath);
+                    db = new Database(conn);
+                }
+                else
+                    MessageBox.Show("Error, can't open database", "Error");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error, can't open database", "Error");
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
         public ObservableCollection<ProjectResult> GetProjectsTree()
         {
-            var projects =
-                from p in db.Project
-                orderby p.ProjectTitle ascending
-                select new ProjectResult
-                {
-                    Id = p.ProjectId,
-                    Title = p.ProjectTitle,
-                    Pages = GetPages(p.ProjectId)
-                };
-            return new ObservableCollection<ProjectResult>(projects);
+            try
+            {
+                var projects =
+                    from p in db.Project
+                    orderby p.ProjectTitle ascending
+                    select new ProjectResult
+                    {
+                        Id = p.ProjectId,
+                        Title = p.ProjectTitle,
+                        Pages = GetPages(p.ProjectId)
+                    };
+                return new ObservableCollection<ProjectResult>(projects);
+            }
+            catch (Exception e)
+            {
+                return new ObservableCollection<ProjectResult>(null);
+            }
         }
 
-        //if page is archived||if page is trash
-        //todo:Error Getting Page||Create new page
         /// <summary>
         /// 
         /// </summary>
@@ -47,42 +63,54 @@ namespace PersonalWiki
         /// <returns></returns>
         public ObservableCollection<PageResult> GetPages(int id)
         {
-            var pages =
-                from p in db.Page
-                where p.ProjectId == id
-                orderby p.PageTitle
-                select new PageResult
-                {
-                    Id = p.PageId,
-                    Title = p.PageTitle
-                };
-            return new ObservableCollection<PageResult>(pages);
+            try
+            {
+                var pages =
+                    from p in db.Page
+                    where p.ProjectId == id
+                    orderby p.PageTitle
+                    select new PageResult
+                    {
+                        Id = p.PageId,
+                        Title = p.PageTitle
+                    };
+                return new ObservableCollection<PageResult>(pages);
+            }
+            catch (Exception e)
+            {
+                return new ObservableCollection<PageResult>(null);
+            }
         }
 
         public ObservableCollection<PageResult2> GetPage(int id)
         {
-            var page =
-                from p in db.Page
-                join r in db.Revision
-                on p.PageId equals r.PageId
-                orderby r.RevisionTimestamp descending
-                where p.PageId == id
-                select new PageResult2
-                {
-                    Title = p.PageTitle,
-                    Text = r.RevisionText,
-                    Date = r.RevisionTimestamp
-                };
-            if(page.Count().Equals(0))
-                page=
+            try
+            {
+                var page =
                     from p in db.Page
+                    join r in db.Revision
+                    on p.PageId equals r.PageId
+                    orderby r.RevisionTimestamp descending
                     where p.PageId == id
                     select new PageResult2
                     {
-                        Title = p.PageTitle
+                        Title = p.PageTitle,
+                        Text = r.RevisionText,
+                        Date = r.RevisionTimestamp
                     };
-
-            return new ObservableCollection<PageResult2>(page.Take(1));
+                if(page.Count().Equals(0))
+                    page=
+                        from p in db.Page
+                        where p.PageId == id
+                        select new PageResult2
+                        {
+                            Title = p.PageTitle
+                        };
+                return new ObservableCollection<PageResult2>(page.Take(1));
+            }
+            catch (Exception e) {
+                return new ObservableCollection<PageResult2>(null);
+            }
         }
 
         /// <summary>
@@ -90,20 +118,29 @@ namespace PersonalWiki
         /// </summary>
         public ObservableCollection<Model.Revision> GetRevisions(int id)
         {
-            var revision =
-                from  r in db.Revision
-                orderby r.RevisionTimestamp descending
-                where r.PageId == id
-                select new Model.Revision
-                {
-                    Date = r.RevisionTimestamp,
-                    Text = r.RevisionText
-                };
-            return new ObservableCollection<Model.Revision>(revision);
+            try
+            {
+                var revision =
+                    from r in db.Revision
+                    orderby r.RevisionTimestamp descending
+                    where r.PageId == id
+                    select new Model.Revision
+                    {
+                        Date = r.RevisionTimestamp,
+                        Text = r.RevisionText
+                    };
+                return new ObservableCollection<Model.Revision>(revision);
+            }
+            catch (Exception e)
+            {
+                return new ObservableCollection<Model.Revision>(null);
+            }
         }
 
         public string GetPageTabHeader(int id)
         {
+            try
+            {
             var header =
                 from p in db.Page
                 join pr in db.Project
@@ -115,11 +152,14 @@ namespace PersonalWiki
                 };
             if (header.ToArray().Count() == 1 && header.ToArray()[0].Title != null)
                 return header.ToArray()[0].Title;
+            }
+            catch (Exception e) { }
             return string.Empty;
         }
 
         public bool updateTitle(int id, string title)
         {
+            bool success = false;
             try
             {
                 var page =
@@ -128,13 +168,13 @@ namespace PersonalWiki
                     select p;
                 page.Single().PageTitle = title;
                 db.SubmitChanges();
+                success = true;
             }
             catch (Exception e)
             {
-                //todo:error handling
+                MessageBox.Show("Error, can't update title");
             }
-            //todo:jos onnistuus
-            return false;
+            return success;
         }
 
         public bool addRevision(int id, string text)
@@ -186,6 +226,8 @@ namespace PersonalWiki
 
         public ObservableCollection<PageResult2> FindPage(string keyword)
         {
+            try
+            {
             var page =
                 from p in db.Page
                 join r in db.Revision
@@ -201,6 +243,11 @@ namespace PersonalWiki
                     Date = r.RevisionTimestamp
                 };
             return new ObservableCollection<PageResult2>(page);
+            }
+            catch (Exception e)
+            {
+                return new ObservableCollection<PageResult2>(null);
+            }
         }
 
         /// <summary>
@@ -267,48 +314,66 @@ namespace PersonalWiki
 
         private ObservableCollection<PageResult> GetProjects()
         {
-            var projects =
-                from p in db.Project
-                orderby p.ProjectTitle
-                select new PageResult
-                {
-                    Id = p.ProjectId,
-                    Title = p.ProjectTitle
-                };
-            return new ObservableCollection<PageResult>(projects);
+            try
+            {
+                var projects =
+                    from p in db.Project
+                    orderby p.ProjectTitle
+                    select new PageResult
+                    {
+                        Id = p.ProjectId,
+                        Title = p.ProjectTitle
+                    };
+                return new ObservableCollection<PageResult>(projects);
+            }
+            catch (Exception e) {
+                return new ObservableCollection<PageResult>(null);
+            }
         }
 
         public bool ProjectExists()
         {
             bool exist = true;
+            try
+            {
             var projects =
                 from p in db.Project
                 select p;
             if (projects.Count().Equals(0))
                 exist = false;
+            }
+            catch (Exception e) { }
             return exist;
         }
 
         public bool ProjectExists(string projectTitle)
         {
             bool exist = true;
+            try
+            {
             var projects =
                 from p in db.Project
                 where p.ProjectTitle.Equals(projectTitle)
                 select p;
             if (projects.Count().Equals(0))
                 exist = false;
+            }
+            catch (Exception e) { }
             return exist;
         }
 
         public bool RevisionsExists()
         {
             bool exist = true;
+            try
+            {
             var revisions =
                 from r in db.Revision
                 select r;
             if (revisions.Count().Equals(0))
                 exist = false;
+            }
+            catch (Exception e) { }
             return exist;
         }
 
@@ -390,6 +455,8 @@ namespace PersonalWiki
         public bool PageExists(int projectId, string pageTitle)
         {
             bool exist = true;
+            try
+            {
             var pages =
                 from p in db.Page
                 where p.PageTitle.Equals(pageTitle) &&
@@ -397,25 +464,37 @@ namespace PersonalWiki
                 select p;
             if (pages.Count().Equals(0))
                 exist = false;
+            }
+            catch (Exception e) { }
             return exist;
         }
 
         //todo: create db, users removed from dbml
         public bool createDatabase()
         {
+            try
+            {
+                string conn = string.Format("Data Source={0}", @Properties.Settings.Default.DatabasePath);
+                db = new Database(conn);
 /*            if (!File.Exists(DatabasePath.Path))
             {
                 db.CreateDatabase();
                 //todo:jos onnistuus
             }*/
+            }
+            catch (Exception e) { }
             return false;
         }
 
         public void Dispose()
         {
-            db.Dispose();
-            db = null;
-            GC.SuppressFinalize(this);
+            try
+            {
+                db.Dispose();
+                db = null;
+                GC.SuppressFinalize(this);
+            }
+            catch (Exception e) { }
         }
     }
 }

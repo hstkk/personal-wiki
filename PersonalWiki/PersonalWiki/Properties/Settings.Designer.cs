@@ -49,18 +49,6 @@ namespace PersonalWiki.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
-        public string SpellCheckLanguage {
-            get {
-                return ((string)(this["SpellCheckLanguage"]));
-            }
-            set {
-                this["SpellCheckLanguage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool TextWrap {
             get {
@@ -74,9 +62,9 @@ namespace PersonalWiki.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("11")]
-        public string FontSize {
+        public int FontSize {
             get {
-                return ((string)(this["FontSize"]));
+                return ((int)(this["FontSize"]));
             }
             set {
                 this["FontSize"] = value;
@@ -92,6 +80,18 @@ namespace PersonalWiki.Properties {
             }
             set {
                 this["DatabasePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Tabs {
+            get {
+                return ((string)(this["Tabs"]));
+            }
+            set {
+                this["Tabs"] = value;
             }
         }
     }
