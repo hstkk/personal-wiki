@@ -15,7 +15,7 @@
                    Text="Global find" />
             <TextBlock TextWrapping="Wrap"
                        FontSize="10" 
-                       Text="Please note that the selected page will be opened to a new tab" />
+                       Text="Please note that the selected page will be opened to a new tab if it is not already open." />
             <Label Content="Find what:" />
             <TextBox Name="search"
                      TextChanged="searchTextChanged" />

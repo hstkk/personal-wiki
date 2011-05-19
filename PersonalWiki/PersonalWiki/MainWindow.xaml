@@ -9,7 +9,7 @@
         Icon="tango-accessories-text-editor.ico"
         Closing="MainWindowClosing">
     <Window.Resources>
-        <ResourceDictionary Source="MainWindowResources.xaml"/>
+        <ResourceDictionary Source="MainWindowResources.xaml" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Help" Executed="ShowAboutTab" />
@@ -26,13 +26,13 @@
         <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu SmallImageSource="Images\16x16\accessories-text-editor.png">
-                    <ribbon:RibbonApplicationMenuItem Header="New"
+                    <!--<ribbon:RibbonApplicationMenuItem Header="New database"
                                                       ImageSource="Images\32x32\document-new.png"
                                                       Command="New" />
-                    <ribbon:RibbonApplicationMenuItem Header="Open"
+                    <ribbon:RibbonApplicationMenuItem Header="Open database"
                                                       ImageSource="Images\32x32\document-open.png"
                                                       Command="Open" />
-                    <ribbon:RibbonSeparator/>
+                    <ribbon:RibbonSeparator/>-->
                     <ribbon:RibbonApplicationMenuItem Header="Import"
                                                       ImageSource="Images\32x32\document-open.png"
                                                       Command="local:Commands.ImportPage" />
@@ -91,32 +91,22 @@
                                     Header="Text">
                     <WrapPanel>
                         <ComboBox Name="font"
-                                  ItemsSource="{Binding}" />
+                                  SelectionChanged="fontSelectionChanged"
+                                  ItemsSource="{Binding}"
+                                  Margin="0,0,5,0"
+                                  SelectedValuePath="Source" />
                         <ComboBox Name="size"
                                   SelectionChanged="sizeSelectionChanged"
-                                  SelectedValue="{Binding Path=Properties.Settings.Default.FontSize}"
-                                  SelectedItem="{Binding Path=Properties.Settings.Default.FontSize}"
-                                  >
-                            <ComboBoxItem Content="8"/>
-                            <ComboBoxItem Content="9"/>
-                            <ComboBoxItem Content="9" />
-                            <ComboBoxItem Content="10" />
-                            <ComboBoxItem Content="11" />
-                            <ComboBoxItem Content="12" />
-                            <ComboBoxItem Content="14" />
-                            <ComboBoxItem Content="16" />
-                            <ComboBoxItem Content="18" />
-                            <ComboBoxItem Content="20" />
-                            <ComboBoxItem Content="22" />
-                            <ComboBoxItem Content="24" />
-                            <ComboBoxItem Content="26" />
-                            <ComboBoxItem Content="28" />
-                            <ComboBoxItem Content="36" />
-                            <ComboBoxItem Content="48" />
-                            <ComboBoxItem Content="72" />
-                        </ComboBox>
+                                  ItemsSource="{Binding}" />
                     </WrapPanel>
-                    <ribbon:RibbonCheckBox Label="Wrap" />
+                    <ribbon:RibbonCheckBox Name="wrap"
+                                           Label="Wrap"
+                                           IsChecked="{Binding Source={StaticResource settings}, Path=Default.TextWrap}"
+                                           Click="wrapClicked" />
+                    <ribbon:RibbonCheckBox Label="Spellcheck"
+                                           Name="spellcheck"
+                                           IsChecked="{Binding Source={StaticResource settings}, Path=Default.SpellCheck}"
+                                           Click="spellcheckClicked" />
                     <!--<ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-bold.png"/>
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-italic.png"/>
                     <ribbon:RibbonButton SmallImageSource="Images\16x16\format-text-underline.png"/>
@@ -133,15 +123,17 @@
                                          Label="Select all"
                                          Command="SelectAll" />
                 </ribbon:RibbonGroup>
+                <!--
                 <ribbon:RibbonGroup x:Name="Spellcheck" Header="Spellcheck">
-                    <ribbon:RibbonCheckBox Label="Enabled"/>
-                    <ComboBox>
-                        <ComboBoxItem Selector.IsSelected="True">en-US</ComboBoxItem>
-                        <ComboBoxItem>fr-FR</ComboBoxItem>
-                        <ComboBoxItem>es-ES</ComboBoxItem>
-                        <ComboBoxItem>de-DE</ComboBoxItem>
-                    </ComboBox>
+                    <ribbon:RibbonCheckBox Label="Enabled"
+                                           Name="spellcheck"
+                                           IsChecked="{Binding Source={StaticResource settings}, Path=Default.SpellCheck}"
+                                           Click="spellcheckClicked" />
+                    <ComboBox Name="language"
+                              SelectionChanged="languageSelectionChanged"
+                              ItemsSource="{Binding}" />
                 </ribbon:RibbonGroup>
+                -->
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
         <Grid DockPanel.Dock="Bottom">
