@@ -470,21 +470,21 @@ namespace PersonalWiki
         }
 
         //todo: create db, users removed from dbml
-        public bool createDatabase()
+/*        public bool createDatabase()
         {
             try
             {
                 string conn = string.Format("Data Source={0}", @Properties.Settings.Default.DatabasePath);
                 db = new Database(conn);
-/*            if (!File.Exists(DatabasePath.Path))
+            if (!File.Exists(DatabasePath.Path))
             {
                 db.CreateDatabase();
                 //todo:jos onnistuus
-            }*/
+            }
             }
             catch (Exception e) { }
             return false;
-        }
+        }*/
 
         public void Dispose()
         {

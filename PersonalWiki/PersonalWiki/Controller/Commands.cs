@@ -100,5 +100,16 @@ namespace PersonalWiki
                 return exportTxt;
             }
         }
+
+        private static RoutedUICommand exportHtml;
+        public static ICommand ExportHtml
+        {
+            get
+            {
+                if (exportHtml == null)
+                    exportHtml = new RoutedUICommand("Export html", "ExportHtml", typeof(Commands));
+                return exportHtml;
+            }
+        }
     }
 }

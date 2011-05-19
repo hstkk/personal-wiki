@@ -173,4 +173,3 @@ C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\Imp
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\ImportPageDialog.g.cs
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindDialog.baml
 C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\FindDialog.g.cs
-C:\Users\Sami\Desktop\työnalla\PersonalWiki\PersonalWiki\obj\x86\Debug\View\Export.baml

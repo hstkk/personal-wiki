@@ -22,6 +22,7 @@
         <CommandBinding Command="Replace" Executed="ShowFindReplaceDialog" CanExecute="textCanExecute" />
         <CommandBinding Command="Print" Executed="printExecuted" CanExecute="textCanExecute" />
         <CommandBinding Command="local:Commands.ExportTxt" Executed="exportTxtExecuted" CanExecute="textCanExecute" />
+        <CommandBinding Command="local:Commands.ExportHtml" Executed="exportHtmlExecuted" CanExecute="textCanExecute" />
     </UserControl.CommandBindings>
     <DockPanel LastChildFill="True">
             <TextBox Name="title"
