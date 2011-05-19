@@ -41,12 +41,15 @@
                         <ribbon:RibbonApplicationMenuItem Header="txt"
                                                       ImageSource="Images\32x32\document-save.png"
                                                       Command="local:Commands.ExportTxt" />
-                        <ribbon:RibbonApplicationMenuItem Header="xps"
+                        <ribbon:RibbonApplicationMenuItem Header="txt"
+                                                      ImageSource="Images\32x32\document-save.png"
+                                                      Command="local:Commands.ExportHtml" />
+                        <!--<ribbon:RibbonApplicationMenuItem Header="xps"
                                                       ImageSource="Images\32x32\document-save.png"
                                                       Command="Open" />
                         <ribbon:RibbonApplicationMenuItem Header="pdf"
                                                       ImageSource="Images\32x32\document-save.png"
-                                                      Command="Open" />
+                                                      Command="Open" />-->
                     </ribbon:RibbonApplicationMenuItem>
                     <ribbon:RibbonSeparator/>
                     <ribbon:RibbonApplicationMenuItem Header="Print"

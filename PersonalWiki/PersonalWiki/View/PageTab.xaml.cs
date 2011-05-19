@@ -181,16 +181,7 @@ namespace PersonalWiki.View
             if(dlg.ShowDialog().Equals(true))
             {
                 PrintDocument doc = new PrintDocument();
-                dlg.PrintVisual(text, "First Fit to Page WPF Print");
-//                dlg.PrintDocument(text.Text, title.Text);
-//                doc.pr
-//                doc.Print();
-                MessageBox.Show("ok");
-                /*
-                new PrintDocument();
-                XpsDocument xpsDocument = new XpsDocument("C:\\FixedDocumentSequence.xps", FileAccess.ReadWrite);
-                FixedDocumentSequence fixedDocSeq = xpsDocument.GetFixedDocumentSequence();
-                pDialog.PrintDocument(fixedDocSeq.DocumentPaginator, "Test print job");*/
+                dlg.PrintVisual(text, title.Text);
             }
         }
 
@@ -198,6 +189,12 @@ namespace PersonalWiki.View
         {
             Controller.ExportX txt = new Controller.ExportX(title.Text, text.Text);
             txt.createTxt();
+        }
+
+        private void exportHtmlExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.ExportX html = new Controller.ExportX(title.Text, text.Text);
+            html.createHtml();
         }
     }
 }
