@@ -40,7 +40,7 @@
                                                       ImageSource="Images\32x32\document-save-as.png">
                         <ribbon:RibbonApplicationMenuItem Header="txt"
                                                       ImageSource="Images\32x32\document-save.png"
-                                                      Command="Open" />
+                                                      Command="local:Commands.ExportTxt" />
                         <ribbon:RibbonApplicationMenuItem Header="xps"
                                                       ImageSource="Images\32x32\document-save.png"
                                                       Command="Open" />
