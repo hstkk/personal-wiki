@@ -1,4 +1,5 @@
-﻿using System;
+﻿//2011 Sami Hostikka <sami@hostikka.com>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

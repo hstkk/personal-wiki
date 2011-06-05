@@ -1,4 +1,5 @@
-﻿<Window x:Class="PersonalWiki.View.ImportPageDialog"
+﻿<!--2011 Sami Hostikka <sami@hostikka.com>-->
+<Window x:Class="PersonalWiki.View.ImportPageDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="New page" Height="323" Width="300">

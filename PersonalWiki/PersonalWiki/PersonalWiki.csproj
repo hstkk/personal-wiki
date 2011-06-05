@@ -203,6 +203,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Diagrams\ClassDiagram.cd" />
     <None Include="Database.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Database.designer.cs</LastGenOutput>
@@ -321,9 +322,7 @@
   <ItemGroup>
     <Resource Include="Images\32x32\help-browser.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Diagrams\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Database.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

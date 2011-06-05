@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PersonalWiki.exe" size="146944">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PersonalWiki.exe" size="145920">
       <assemblyIdentity name="PersonalWiki" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>D7LOgRQ1qsDtZ0Em4trTADDHB5Y=</dsig:DigestValue>
+        <dsig:DigestValue>Xzt9b2SAidOOtgnw/z8IC2zm4+A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
