@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace PersonalWiki
 {
+    /// <summary>
+    /// Creates new custom commands, when get method is executed if RoutedUICommand object doesn't exist object will be created and object is returned
+    /// </summary>
     static class Commands
     {
         private static RoutedUICommand newPage;
@@ -42,10 +45,6 @@ namespace PersonalWiki
         }
 
         private static RoutedUICommand closeTab;
-        /// <summary>
-        /// Returns the command that, when invoked, attempts
-        /// to remove this workspace from the user interface.
-        /// </summary>
         public static ICommand CloseTab
         {
             get

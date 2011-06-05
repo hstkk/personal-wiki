@@ -8,9 +8,9 @@ namespace PersonalWiki
     /// <summary>
     /// Data model to LINQ query
     /// </summary>
-    public class PageResult
+    public class PageResult2:PageResult
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public DateTime Date { get; set; }
+        public string Text { get; set; }
     }
 }

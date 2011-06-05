@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Windows.Threading;
-using System.Drawing.Printing;
 
 namespace PersonalWiki.View
 {
@@ -53,7 +52,7 @@ namespace PersonalWiki.View
 
         #region events
         /// <summary>
-        /// 
+        /// When auto save timer has stopped, date textblock is updated and save method is called
         /// </summary>
         private void Save(object sender, EventArgs e)
         {
@@ -63,6 +62,9 @@ namespace PersonalWiki.View
             unsaved.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// If title is changed starts auto save timer
+        /// </summary>
         private void titleChanged(object sender, TextChangedEventArgs e)
         {
             if (_gotFocus && !_titleChanged && !string.IsNullOrWhiteSpace(title.Text))
@@ -74,7 +76,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// If text is changed starts auto save timer
         /// </summary>
         private void textChanged(object sender, TextChangedEventArgs e)
         {
@@ -86,9 +88,8 @@ namespace PersonalWiki.View
             }
         }
 
-        //binding aiheuttaa turhaan textchanged eventin sen ehkäisemiseksi
         /// <summary>
-        /// 
+        /// It seems that binding triggers title/textchanged event, this event is only to fix that problem. When title or text textbox got focus _gotFocus bool is set to true.
         /// </summary>
         private void titleTextGotFocus(object sender, RoutedEventArgs e)
         {
@@ -96,7 +97,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// When keyword is found, keyword is selected
         /// </summary>
         private void onFound(object sender, EventArgs e)
         {
@@ -106,7 +107,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// When replace is executed, text textbox content is replaced with new content
         /// </summary>
         private void onReplaced(object sender, EventArgs e)
         {
@@ -116,6 +117,9 @@ namespace PersonalWiki.View
         #endregion
 
         #region commands
+        /// <summary>
+        /// shows RevisionsDialog, if dialog result returns true updates datacontext
+        /// </summary>
         private void ShowRevisionsDialog(object sender, RoutedEventArgs e)
         {
             View.RevisionDialog dlg = new View.RevisionDialog(Id);
@@ -126,7 +130,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// shows FindReplaceDialog and sets events between FindReplaceDialog and this
         /// </summary>
         private void ShowFindReplaceDialog(object sender, RoutedEventArgs e)
         {
@@ -137,7 +141,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// if text textbox is not null commands can be executed
         /// </summary>
         private void textCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -146,7 +150,7 @@ namespace PersonalWiki.View
         }
 
         /// <summary>
-        /// 
+        /// Revisions link can be executes
         /// </summary>
         private void ShowRevisionsCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -154,8 +158,46 @@ namespace PersonalWiki.View
                 if (dp.GetRevisions(Id).Count > 1)
                     e.CanExecute = true;
         }
+
+        /// <summary>
+        /// when tab is on closing state, save method is executed
+        /// </summary>
+        public void Closing()
+        {
+            save();
+        }
+
+        /// <summary>
+        /// Executes ExportX class createPrint method
+        /// </summary>
+        private void printExecuted(object sender, RoutedEventArgs e)
+        {
+            Controller.ExportX print = new Controller.ExportX(title.Text, text.Text);
+            print.createPrint();
+        }
+
+        /// <summary>
+        /// Executes ExportX class createTxt method
+        /// </summary>
+        private void exportTxtExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.ExportX txt = new Controller.ExportX(title.Text, text.Text);
+            txt.createTxt();
+        }
+
+        /// <summary>
+        /// Executes ExportX class createHtml method
+        /// </summary>
+        private void exportHtmlExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.ExportX html = new Controller.ExportX(title.Text, text.Text);
+            html.createHtml();
+        }
         #endregion
 
+        /// <summary>
+        /// If title is changed, updates it to database. If text is changed, creates new revision to database.
+        /// </summary>
         private void save()
         {
             if (_titleChanged && !string.IsNullOrWhiteSpace(title.Text))
@@ -166,35 +208,6 @@ namespace PersonalWiki.View
                     dp.addRevision(Id, text.Text);
             _titleChanged = false;
             _textChanged = false;
-        }
-
-        public void Closing()
-        {
-            save();
-        }
-
-        private void printExecuted(object sender, RoutedEventArgs e)
-        {
-            PrintDialog dlg = new PrintDialog();
-            dlg.PageRangeSelection = PageRangeSelection.AllPages;
-            dlg.UserPageRangeEnabled = true;
-            if(dlg.ShowDialog().Equals(true))
-            {
-                PrintDocument doc = new PrintDocument();
-                dlg.PrintVisual(text, title.Text);
-            }
-        }
-
-        private void exportTxtExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            Controller.ExportX txt = new Controller.ExportX(title.Text, text.Text);
-            txt.createTxt();
-        }
-
-        private void exportHtmlExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            Controller.ExportX html = new Controller.ExportX(title.Text, text.Text);
-            html.createHtml();
         }
     }
 }
