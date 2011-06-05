@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Windows.Controls;
 using System.Drawing.Printing;
+using System.Drawing;
 
 namespace PersonalWiki.Controller
 {
@@ -90,17 +91,40 @@ namespace PersonalWiki.Controller
             }
         }
 
+        /// <summary>
+        /// Prints given data
+        /// </summary>
         public void createPrint()
         {
-            PrintDialog dlg = new PrintDialog();
-            dlg.PageRangeSelection = PageRangeSelection.AllPages;
-            dlg.UserPageRangeEnabled = true;
-            if (dlg.ShowDialog().Equals(true))
+            try
             {
-                PrintDocument doc = new PrintDocument();
-//                dlg.PrintVisual(text, title.Text);
+                PrintDialog dlg = new PrintDialog();
+                dlg.PageRangeSelection = PageRangeSelection.AllPages;
+                dlg.UserPageRangeEnabled = true;
+                if (dlg.ShowDialog().Equals(true))
+                {
+                    FixedDocument fixedDocument = new FixedDocument();
+                    fixedDocument.DocumentPaginator.PageSize = new System.Windows.Size(dlg.PrintableAreaWidth, dlg.PrintableAreaHeight);
+                    var pageContent = new PageContent();
+                    fixedDocument.Pages.Add(pageContent);
+                    var page = new FixedPage();
+                    page.Width = fixedDocument.DocumentPaginator.PageSize.Width;
+                    page.Height = fixedDocument.DocumentPaginator.PageSize.Height;
+                    pageContent.Child = page;
+                    TextBlock block = new TextBlock();
+                    block.TextWrapping = TextWrapping.Wrap;
+                    block.FontSize = Properties.Settings.Default.FontSize;
+                    block.Inlines.Add(new Bold(new Run(title)));
+                    block.Inlines.Add(new LineBreak());
+                    block.Inlines.Add(new Run(text));
+                    page.Children.Add(block);
+                    dlg.PrintDocument(fixedDocument.DocumentPaginator, title);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error, can't print", "Error");
             }
         }
-//todo:print
     }
 }

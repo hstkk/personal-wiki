@@ -107,7 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Copy of PageResult.cs" />
+    <Compile Include="Model\PageResult2.cs" />
     <Compile Include="Model\Revision.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="View\AboutTab.xaml.cs">
@@ -203,7 +203,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Database.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Database.designer.cs</LastGenOutput>
