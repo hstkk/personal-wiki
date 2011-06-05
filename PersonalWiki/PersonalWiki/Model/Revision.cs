@@ -5,6 +5,9 @@ using System.Text;
 
 namespace PersonalWiki.Model
 {
+    /// <summary>
+    /// Data model to LINQ query
+    /// </summary>
     class Revision
     {
         public DateTime Date { get; set; }

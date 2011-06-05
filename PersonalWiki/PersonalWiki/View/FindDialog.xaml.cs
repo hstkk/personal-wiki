@@ -46,6 +46,9 @@ namespace PersonalWiki
             Id = -1;
         }
 
+        /// <summary>
+        /// if datagrid selection changes call onFound method
+        /// </summary>
         private void dataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dataGrid.SelectedItem != null)
@@ -64,18 +67,24 @@ namespace PersonalWiki
         {
             this.DialogResult = false;
         }
-        #endregion
 
+        /// <summary>
+        /// If find is executed sets datagrid datacontext
+        /// </summary>
         private void findExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             using (DataProvider dp = new DataProvider())
                 dataGrid.DataContext = dp.FindPage(search.Text);
         }
 
+        /// <summary>
+        /// if keyword != null find can be executed
+        /// </summary>
         private void findCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(search.Text))
                 e.CanExecute = true;
         }
+        #endregion
     }
 }

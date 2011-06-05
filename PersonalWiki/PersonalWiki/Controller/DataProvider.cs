@@ -6,14 +6,18 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 
-//using System.Data;
-
-
 namespace PersonalWiki
 {
+    /// <summary>
+    /// DataProvider class provides all LINQ queries
+    /// </summary>
     class DataProvider : IDisposable
     {
         private Database db = null;
+
+        /// <summary>
+        /// try to connect to database
+        /// </summary>
         public DataProvider()
         {
             try
@@ -33,7 +37,7 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// 
+        /// Gets all projects and pages for treeview
         /// </summary>
         public ObservableCollection<ProjectResult> GetProjectsTree()
         {
@@ -57,10 +61,11 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// 
+        /// Get pages by project id
         /// </summary>
+        /// <param name="id">Project id</param>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>PageResult object in other words page title and id</returns>
         public ObservableCollection<PageResult> GetPages(int id)
         {
             try
@@ -82,6 +87,11 @@ namespace PersonalWiki
             }
         }
 
+        /// <summary>
+        /// Get page by page id
+        /// </summary>
+        /// <param name="id">Page id</param>
+        /// <returns>PageResult2 object in other words page title and if revisions exists returns revision text and revision timestamp</returns>
         public ObservableCollection<PageResult2> GetPage(int id)
         {
             try
@@ -114,8 +124,10 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// 
+        /// Get revisions by page id
         /// </summary>
+        /// <param name="id">Page id</param>
+        /// <returns>Revision object in other words revision text and timestamp</returns>
         public ObservableCollection<Model.Revision> GetRevisions(int id)
         {
             try
@@ -137,6 +149,11 @@ namespace PersonalWiki
             }
         }
 
+        /// <summary>
+        /// Get tab header title by page id
+        /// </summary>
+        /// <param name="id">Page id</param>
+        /// <returns>title string</returns>
         public string GetPageTabHeader(int id)
         {
             try
@@ -157,6 +174,12 @@ namespace PersonalWiki
             return string.Empty;
         }
 
+        /// <summary>
+        /// Updates pages title
+        /// </summary>
+        /// <param name="id">Page id</param>
+        /// <param name="title">New title</param>
+        /// <returns>true if update was succesful</returns>
         public bool updateTitle(int id, string title)
         {
             bool success = false;
@@ -177,6 +200,12 @@ namespace PersonalWiki
             return success;
         }
 
+        /// <summary>
+        /// Adds new revision
+        /// </summary>
+        /// <param name="id">Page id</param>
+        /// <param name="text">Revision text</param>
+        /// <returns>true if add was succesful</returns>
         public bool addRevision(int id, string text)
         {
             bool success = false;
@@ -224,6 +253,11 @@ namespace PersonalWiki
             return success;
         }
 
+        /// <summary>
+        /// Returns all pages where page title or revision text contains keyword
+        /// </summary>
+        /// <param name="keyword">keyword</param>
+        /// <returns>PageResult2 object in other words page title, id, revision text and revision timestamp</returns>
         public ObservableCollection<PageResult2> FindPage(string keyword)
         {
             try
@@ -312,6 +346,10 @@ namespace PersonalWiki
             return success;
         }
 
+        /// <summary>
+        /// Returns all projects
+        /// </summary>
+        /// <returns>PageResult object in other words project title and id</returns>
         private ObservableCollection<PageResult> GetProjects()
         {
             try
@@ -331,55 +369,70 @@ namespace PersonalWiki
             }
         }
 
+        /// <summary>
+        /// Checks if any projects exists
+        /// </summary>
+        /// <returns>true if any projects exists</returns>
         public bool ProjectExists()
         {
-            bool exist = true;
+            bool exist = false;
             try
             {
             var projects =
                 from p in db.Project
                 select p;
-            if (projects.Count().Equals(0))
-                exist = false;
-            }
-            catch (Exception e) { }
-            return exist;
-        }
-
-        public bool ProjectExists(string projectTitle)
-        {
-            bool exist = true;
-            try
-            {
-            var projects =
-                from p in db.Project
-                where p.ProjectTitle.Equals(projectTitle)
-                select p;
-            if (projects.Count().Equals(0))
-                exist = false;
-            }
-            catch (Exception e) { }
-            return exist;
-        }
-
-        public bool RevisionsExists()
-        {
-            bool exist = true;
-            try
-            {
-            var revisions =
-                from r in db.Revision
-                select r;
-            if (revisions.Count().Equals(0))
-                exist = false;
+            if (!projects.Count().Equals(0))
+                exist = true;
             }
             catch (Exception e) { }
             return exist;
         }
 
         /// <summary>
-        /// 
+        /// Checks if any projects exists by project title
         /// </summary>
+        /// <param name="projectTitle">project title</param>
+        /// <returns>true if any projects exists</returns>
+        public bool ProjectExists(string projectTitle)
+        {
+            bool exist = false;
+            try
+            {
+            var projects =
+                from p in db.Project
+                where p.ProjectTitle.Equals(projectTitle)
+                select p;
+            if (!projects.Count().Equals(0))
+                exist = true;
+            }
+            catch (Exception e) { }
+            return exist;
+        }
+
+        /// <summary>
+        /// Checks if any revisions exists
+        /// </summary>
+        /// <returns>true if any revisions exists</returns>
+        public bool RevisionsExists()
+        {
+            bool exist = false;
+            try
+            {
+            var revisions =
+                from r in db.Revision
+                select r;
+            if (!revisions.Count().Equals(0))
+                exist = true;
+            }
+            catch (Exception e) { }
+            return exist;
+        }
+
+        /// <summary>
+        /// Delete page and its revisions by page id
+        /// </summary>
+        /// <param name="id">Page id</param>
+        /// <returns>true, if delete is succesful</returns>
         public bool deletePage(int id)
         {
             bool success = false;
@@ -406,8 +459,10 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// 
+        /// Delete project and pages belonging to project
         /// </summary>
+        /// <param name="id">Project id</param>
+        /// <returns>true, if delete is succesful</returns>
         public bool deleteProject(int id)
         {
             bool success = false;
@@ -435,8 +490,10 @@ namespace PersonalWiki
         }
 
         /// <summary>
-        /// 
+        /// Get pages project id by page id
         /// </summary>
+        /// <param name="id">page id</param>
+        /// <returns>projects id</returns>
         public int GetProjectId(int id)
         {
             int projectId = -1;
@@ -452,9 +509,15 @@ namespace PersonalWiki
             return projectId;
         }
 
+        /// <summary>
+        /// Checks if page exist
+        /// </summary>
+        /// <param name="projectId">project id</param>
+        /// <param name="pageTitle">page title</param>
+        /// <returns>true if page exists</returns>
         public bool PageExists(int projectId, string pageTitle)
         {
-            bool exist = true;
+            bool exist = false;
             try
             {
             var pages =
@@ -462,31 +525,34 @@ namespace PersonalWiki
                 where p.PageTitle.Equals(pageTitle) &&
                 p.ProjectId.Equals(projectId)
                 select p;
-            if (pages.Count().Equals(0))
-                exist = false;
+            if (!pages.Count().Equals(0))
+                exist = true;
             }
             catch (Exception e) { }
             return exist;
         }
 
-        //todo: create db, users removed from dbml
+        //todo: create db
 /*        public bool createDatabase()
         {
+            bool success = false;
             try
             {
                 string conn = string.Format("Data Source={0}", @Properties.Settings.Default.DatabasePath);
                 db = new Database(conn);
-            if (!File.Exists(DatabasePath.Path))
-            {
-                db.CreateDatabase();
-                //todo:jos onnistuus
-            }
+                if (!File.Exists(DatabasePath.Path))
+                {
+                    db.CreateDatabase();
+                    success = true;
+                }
             }
             catch (Exception e) { }
-            return false;
+            return success;
         }*/
 
-        //7.6 palautus
+        /// <summary>
+        /// Disposes database object and calls garbage collection (this method allows to use using statement)
+        /// </summary>
         public void Dispose()
         {
             try

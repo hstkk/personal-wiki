@@ -20,6 +20,7 @@ namespace PersonalWiki.View
     /// </summary>
     public partial class ImportPageDialog : Window
     {
+        #region initialize
         private string fileName,text;
         public ImportPageDialog()
         {
@@ -27,6 +28,7 @@ namespace PersonalWiki.View
             using (DataProvider dp = new DataProvider())
                 this.combobox.DataContext = dp.GetProjectsTree();
         }
+        #endregion
 
         #region commands
         /// <summary>

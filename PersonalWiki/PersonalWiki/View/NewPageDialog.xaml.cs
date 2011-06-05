@@ -18,12 +18,14 @@ namespace PersonalWiki.View
     /// </summary>
     public partial class NewPageDialog : Window
     {
+        #region initialize
         public NewPageDialog()
         {
             InitializeComponent();
             using (DataProvider dp = new DataProvider())
                 this.combobox.DataContext = dp.GetProjectsTree();
         }
+        #endregion
 
         #region commands
         /// <summary>

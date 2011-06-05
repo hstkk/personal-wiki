@@ -11,6 +11,7 @@ using System.IO;
 using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Windows.Controls;
+using System.Drawing.Printing;
 
 namespace PersonalWiki.Controller
 {
@@ -18,11 +19,19 @@ namespace PersonalWiki.Controller
     {
         private string title, text;
 
+        /// <summary>
+        /// Creates an object that allows to export data
+        /// </summary>
+        /// <param name="title">filename</param>
+        /// <param name="text">file content</param>
         public ExportX(string title, string text){
             this.title=title;
             this.text=text;
         }
 
+        /// <summary>
+        /// Creates txt file from given data
+        /// </summary>
         public void createTxt()
         {
             var dlg = new SaveFileDialog();
@@ -50,6 +59,9 @@ namespace PersonalWiki.Controller
             }
         }
 
+        /// <summary>
+        /// Creates html5 file from given data
+        /// </summary>
         public void createHtml()
         {
             var dlg = new SaveFileDialog();
@@ -77,42 +89,18 @@ namespace PersonalWiki.Controller
                 }
             }
         }
-        /*
-        public void createXps()
+
+        public void createPrint()
         {
-            var dlg = new SaveFileDialog();
-            dlg.AddExtension = true;
-            dlg.Filter = "xps files|*.xps";
-            dlg.DefaultExt = "xps";
-            dlg.FileName = title;
-            dlg.CheckPathExists = true;
-            dlg.OverwritePrompt = true;
-            dlg.ValidateNames = true;
-
-            if (dlg.ShowDialog() == true && !string.IsNullOrWhiteSpace(dlg.FileName))
+            PrintDialog dlg = new PrintDialog();
+            dlg.PageRangeSelection = PageRangeSelection.AllPages;
+            dlg.UserPageRangeEnabled = true;
+            if (dlg.ShowDialog().Equals(true))
             {
-                try
-                {
-                    Paragraph ptitle = new Paragraph(new Run(title));
-                    Paragraph ptext = new Paragraph(new Run(text));
-                    FlowDocument export;
-                    using(FileStream xaml = File.OpenRead(@"..\View\Export.xaml")){
-                        export = XamlReader.Load(xaml) as FlowDocument;
-                    }
-                    export.Blocks.Add(ptitle);
-                    export.Blocks.Add(ptext);
-                    FlowDocumentReader myFlowDocumentReader = new FlowDocumentReader();
-                    myFlowDocumentReader.Document = export;
-
-
-
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e+"", "Error");
-                    MessageBox.Show("Error, can't save file", "Error");
-                }
+                PrintDocument doc = new PrintDocument();
+//                dlg.PrintVisual(text, title.Text);
             }
-        }*/
+        }
+//todo:print
     }
 }

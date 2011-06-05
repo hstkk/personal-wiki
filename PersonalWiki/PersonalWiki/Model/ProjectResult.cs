@@ -6,11 +6,11 @@ using System.Collections.ObjectModel;
 
 namespace PersonalWiki
 {
+    /// <summary>
+    /// Data model to LINQ query
+    /// </summary>
     public class ProjectResult : PageResult
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public ObservableCollection<PageResult> Pages { get; set; }
     }
 }

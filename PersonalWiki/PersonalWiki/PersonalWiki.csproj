@@ -200,8 +200,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="app.config" />
-    <None Include="Diagrams\ClassDiagram1.cd" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Database.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Database.designer.cs</LastGenOutput>
@@ -320,7 +322,9 @@
   <ItemGroup>
     <Resource Include="Images\32x32\help-browser.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Diagrams\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Database.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
