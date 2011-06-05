@@ -24,11 +24,11 @@ namespace PersonalWiki
                     db = new Database(conn);
                 }
                 else
-                    MessageBox.Show("Error, can't open database", "Error");
+                    MessageBox.Show("Error, can't open database, database should be same directory with exe", "Error");
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error, can't open database", "Error");
+                MessageBox.Show("Error, can't open database, database should be same directory with exe", "Error");
             }
         }
 
@@ -486,6 +486,7 @@ namespace PersonalWiki
             return false;
         }*/
 
+        //7.6 palautus
         public void Dispose()
         {
             try

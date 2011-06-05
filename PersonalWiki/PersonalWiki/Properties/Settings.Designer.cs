@@ -71,15 +71,12 @@ namespace PersonalWiki.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Database.sdf")]
         public string DatabasePath {
             get {
                 return ((string)(this["DatabasePath"]));
-            }
-            set {
-                this["DatabasePath"] = value;
             }
         }
         

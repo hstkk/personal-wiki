@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database.sdf")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dlls/sqlceca35.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dlls/sqlcecompact35.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dlls/sqlceer35en.dll")]

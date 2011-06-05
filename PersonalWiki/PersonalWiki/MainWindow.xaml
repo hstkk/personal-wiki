@@ -41,7 +41,7 @@
                         <ribbon:RibbonApplicationMenuItem Header="txt"
                                                       ImageSource="Images\32x32\document-save.png"
                                                       Command="local:Commands.ExportTxt" />
-                        <ribbon:RibbonApplicationMenuItem Header="txt"
+                        <ribbon:RibbonApplicationMenuItem Header="html"
                                                       ImageSource="Images\32x32\document-save.png"
                                                       Command="local:Commands.ExportHtml" />
                         <!--<ribbon:RibbonApplicationMenuItem Header="xps"
